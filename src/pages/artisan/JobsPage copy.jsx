@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import RatingStars from '../../components/ui/RatingStars';
 import * as jobRequestsService from '../../utils/jobRequestsService';
 
 const JobsPage = () => {
   const [activeTab, setActiveTab] = useState('pending');
   const [jobs, setJobs] = useState([]);
-  const navigate = useNavigate();
 
+  // Simulated logged-in artisan
   const currentUser = { id: 'artisan-123', name: 'CraftConnect Artisan' };
 
   useEffect(() => {
@@ -23,8 +22,8 @@ const JobsPage = () => {
   };
 
   const handleDecline = (jobId) => {
-    const updatedJob = jobRequestsService.declineJobRequest(jobId);
-    setJobs(jobs.map(job => job.id === jobId ? updatedJob : job));
+    jobRequestsService.declineJobRequest(jobId);
+    setJobs(jobs.filter(job => job.id !== jobId));
   };
 
   const handleComplete = (jobId) => {
@@ -43,11 +42,11 @@ const JobsPage = () => {
         </div>
 
         <div className="border-b">
-          <nav className="flex flex-wrap">
-            {['pending', 'accepted', 'completed', 'declined'].map(tab => (
+          <nav className="flex">
+            {['pending', 'accepted', 'completed'].map(tab => (
               <button
                 key={tab}
-                className={`px-4 py-3 font-medium ${activeTab === tab ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+                className={`px-6 py-4 font-medium ${activeTab === tab ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
                 onClick={() => setActiveTab(tab)}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -109,7 +108,6 @@ const JobsPage = () => {
                       <button onClick={() => handleDecline(job.id)} className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Decline</button>
                     </>
                   )}
-                  <button onClick={() => navigate(`/jobs/${job.id}`)} className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">View Job</button>
                   <button className="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50">Message Client</button>
                   {activeTab === 'accepted' && (
                     <button onClick={() => handleComplete(job.id)} className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Mark as Completed</button>

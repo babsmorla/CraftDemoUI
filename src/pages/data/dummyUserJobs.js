@@ -1,0 +1,63 @@
+// pages/data/dummyUserJobs.js
+
+const dummyUserJobs = [
+  {
+    id: 'job-1',
+    userId: 'user-123',
+    artisanId: 'artisan-456',
+    title: 'Fix Leaking Sink',
+    description: 'The kitchen sink is leaking heavily whenever I open the tap. I need it fixed before guests arrive.',
+    budget: 'GHS 150',
+    scheduledAt: '2025-07-15T10:00',
+    location: 'Accra, Spintex',
+    clientName: 'Ama Mensah',
+    clientPhone: '0244123456',
+    clientEmail: 'ama@gmail.com',
+    images: ['/uploads/sink1.jpg', '/uploads/sink2.jpg'],
+    status: 'pending', // accepted, completed, cancelled
+    createdAt: '2025-07-10T09:00',
+    completedAt: null,
+    artisanReview: null,
+  },
+  {
+    id: 'job-2',
+    userId: 'user-123',
+    artisanId: 'artisan-789',
+    title: 'Install Ceiling Fan',
+    description: 'Need a new ceiling fan installed in the bedroom. The wiring is ready, just need the fan fixed securely.',
+    budget: 'Negotiable',
+    scheduledAt: '2025-07-18T14:00',
+    location: 'Tema Community 1',
+    clientName: 'Ama Mensah',
+    clientPhone: '0244123456',
+    clientEmail: 'ama@gmail.com',
+    images: [],
+    status: 'completed',
+    createdAt: '2025-07-01T12:00',
+    completedAt: '2025-07-18T16:00',
+    artisanReview: {
+      rating: 4,
+      comment: 'Work was done well, but the artisan arrived 30 minutes late.',
+    },
+  },
+  {
+    id: 'job-3',
+    userId: 'user-123',
+    artisanId: 'artisan-456',
+    title: 'Paint Living Room',
+    description: 'Need the living room painted with two coats of paint. Paint will be provided.',
+    budget: 'GHS 500',
+    scheduledAt: '2025-07-20T09:00',
+    location: 'Accra, East Legon',
+    clientName: 'Ama Mensah',
+    clientPhone: '0244123456',
+    clientEmail: 'ama@gmail.com',
+    images: ['/uploads/room.jpg'],
+    status: 'cancelled',
+    createdAt: '2025-07-05T15:00',
+    completedAt: null,
+    artisanReview: null,
+  },
+];
+
+export default dummyUserJobs;

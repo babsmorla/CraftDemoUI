@@ -41,15 +41,15 @@ function ProfilePage() {
   const [availableNow, setAvailableNow] = useState(profile.available || false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const days = [
-    { name: "Monday", key: "monday" },
-    { name: "Tuesday", key: "tuesday" },
-    { name: "Wednesday", key: "wednesday" },
-    { name: "Thursday", key: "thursday" },
-    { name: "Friday", key: "friday" },
-    { name: "Saturday", key: "saturday" },
-    { name: "Sunday", key: "sunday" },
-  ];
+  // const days = [
+  //   { name: "Monday", key: "monday" },
+  //   { name: "Tuesday", key: "tuesday" },
+  //   { name: "Wednesday", key: "wednesday" },
+  //   { name: "Thursday", key: "thursday" },
+  //   { name: "Friday", key: "friday" },
+  //   { name: "Saturday", key: "saturday" },
+  //   { name: "Sunday", key: "sunday" },
+  // ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,29 +73,6 @@ function ProfilePage() {
     }));
   };
 
-  const handleDayChange = (dayKey, enabled) => {
-    if (enabled) {
-      setAvailability((prev) => ({
-        ...prev,
-        [dayKey]: { start: "09:00", end: "17:00" },
-      }));
-    } else {
-      setAvailability((prev) => ({
-        ...prev,
-        [dayKey]: null,
-      }));
-    }
-  };
-
-  const handleTimeChange = (dayKey, field, value) => {
-    setAvailability((prev) => ({
-      ...prev,
-      [dayKey]: {
-        ...prev[dayKey],
-        [field]: value,
-      },
-    }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -128,46 +105,7 @@ function ProfilePage() {
           </label>
         </div>
 
-        <div className="space-y-4">
-          {days.map((day) => (
-            <div key={day.key} className="flex items-center">
-              <div className="w-24">
-                <input
-                  type="checkbox"
-                  id={`day-${day.key}`}
-                  checked={!!availability[day.key]}
-                  onChange={(e) => handleDayChange(day.key, e.target.checked)}
-                  className="mr-2"
-                />
-                <label htmlFor={`day-${day.key}`} className="text-gray-700">
-                  {day.name}
-                </label>
-              </div>
-
-              {availability[day.key] && (
-                <div className="flex items-center ml-4 space-x-2">
-                  <input
-                    type="time"
-                    value={availability[day.key].start}
-                    onChange={(e) =>
-                      handleTimeChange(day.key, "start", e.target.value)
-                    }
-                    className="px-2 py-1 border border-gray-300 rounded"
-                  />
-                  <span>to</span>
-                  <input
-                    type="time"
-                    value={availability[day.key].end}
-                    onChange={(e) =>
-                      handleTimeChange(day.key, "end", e.target.value)
-                    }
-                    className="px-2 py-1 border border-gray-300 rounded"
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+    
       </div>
     );
   };

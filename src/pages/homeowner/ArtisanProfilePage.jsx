@@ -45,21 +45,21 @@ const ArtisanProfilePage = () => {
       100,
   };
 
-  const days = [
-    { name: "Monday", key: "monday" },
-    { name: "Tuesday", key: "tuesday" },
-    { name: "Wednesday", key: "wednesday" },
-    { name: "Thursday", key: "thursday" },
-    { name: "Friday", key: "friday" },
-    { name: "Saturday", key: "saturday" },
-    { name: "Sunday", key: "sunday" },
-  ];
+  // const days = [
+  //   { name: "Monday", key: "monday" },
+  //   { name: "Tuesday", key: "tuesday" },
+  //   { name: "Wednesday", key: "wednesday" },
+  //   { name: "Thursday", key: "thursday" },
+  //   { name: "Friday", key: "friday" },
+  //   { name: "Saturday", key: "saturday" },
+  //   { name: "Sunday", key: "sunday" },
+  // ];
 
 
   return (
     <div>
 
-      <div className="mb-8">
+      {/* <div className="mb-8">
         <h2 className="text-xl font-bold mb-4">Availability</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {days.map(day => {
@@ -78,7 +78,7 @@ const ArtisanProfilePage = () => {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
 
       <div
