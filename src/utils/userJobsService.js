@@ -1,14 +1,16 @@
-import dummyJobs from "../pages/data/dummyjobs";
+// Updated userJobsService for single-user simplicity
 
-let jobs = [...dummyJobs];
+import dummyUserJobs from "../pages/data/dummyUserJobs";
 
-export const getJobsForUser = (userId) => {
+let jobs = [...dummyUserJobs];
+
+export const getJobsForUser = () => {
   return jobs;
 };
 
 export const cancelJobRequest = (jobId) => {
   const index = jobs.findIndex((job) => job.id === jobId);
-  if (index !== -1) {
+  if (index !== -1 && jobs[index].status === "pending") {
     jobs[index].status = "cancelled";
   }
 };

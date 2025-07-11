@@ -47,7 +47,7 @@ const dummyJobs = [
     clientEmail: 'efua.owusu@example.com',
     status: 'completed',
     completedAt: new Date().toISOString(),
-    images: [
+       images: [
       'https://res.cloudinary.com/demo/image/upload/v1690000000/ac_install_1.jpg',
       'https://res.cloudinary.com/demo/image/upload/v1690000000/ac_install_2.jpg'
     ],

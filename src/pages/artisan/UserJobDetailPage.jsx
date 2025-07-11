@@ -14,7 +14,6 @@ const UserJobDetailPage = () => {
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded">
       <button onClick={() => navigate(-1)} className="text-blue-600 mb-4 hover:underline">← Back</button>
-
       <h1 className="text-2xl font-bold mb-2">{job.title}</h1>
       <p className="text-gray-600 mb-4">{job.description}</p>
 
@@ -39,18 +38,13 @@ const UserJobDetailPage = () => {
       {job.images && job.images.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
           {job.images.map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt={`Job image ${idx}`}
-              className="rounded border object-cover w-full h-32"
-            />
+            <img key={idx} src={src} alt={`Job image ${idx}`} className="rounded border object-cover w-full h-32" />
           ))}
         </div>
       )}
 
       <div className="flex gap-3 flex-wrap mt-4">
-        {(job.status === 'pending' || job.status === 'accepted') && (
+        {job.status === 'pending' && (
           <button
             onClick={() => alert('Implement cancel logic here')}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -71,4 +65,4 @@ const UserJobDetailPage = () => {
   );
 };
 
-export default UserJobDetailPage
+export default UserJobDetailPage;

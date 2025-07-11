@@ -1,3 +1,4 @@
+// App.js (clean, corrected nested routing)
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -6,12 +7,14 @@ import { AuthProvider } from "./contexts/AuthContext";
 // Layouts
 import Layout from "./components/layout/Layout";
 import DashboardLayout from "./components/layout/DashboardLayout";
+import HomeownerDashboardLayout from "./pages/artisan/HomeownerDashboardLayout";
 
 // Homeowner pages
 import HomePage from "./pages/homeowner/HomePage";
 import SearchPage from "./pages/homeowner/SearchPage";
 import ArtisanProfilePage from "./pages/homeowner/ArtisanProfilePage";
 import ContactPage from "./pages/ContactPage";
+import HomeownerDashboardPage from "./pages/homeowner/HomeownerDashboardPage";
 
 // Artisan pages
 import DashboardPage from "./pages/artisan/DashboardPage";
@@ -29,12 +32,16 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 
 // User job management pages
-
 import UserJobDetailPage from "./pages/artisan/UserJobDetailPage";
 import LeaveReviewPage from "./pages/artisan/LeaveReviewPage";
 import UserJobsPage from "./pages/artisan/UserJobsPage";
 import EditJobRequestPage from "./pages/artisan/EditJobRequestPage";
 
+
+
+import ArtisanAddServicesPage from "./pages/artisan/ArtisanAddServicesPage";
+import ArtisanEditServicesPage from "./pages/artisan/ArtisanEditServicesPage";
+import ArtisanServicesViewPage from "./pages/artisan/ArtisanServicesViewPage";
 
 function App() {
   return (
@@ -55,14 +62,21 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="jobs" element={<JobsPage />} />
             <Route path="jobs/:jobId" element={<JobDetailsPage />} />
-            <Route path="request" element={<RequestJobPage />} />
+
+            <Route path="services" element={<ArtisanServicesViewPage />} />
+            <Route path="services/add" element={<ArtisanAddServicesPage />} />
+            <Route path="services/edit" element={<ArtisanEditServicesPage />} />
           </Route>
 
-          {/* User Job Management Routes */}
-          <Route path="/my-jobs" element={<UserJobsPage/>} />
-          <Route path="/my-jobs/:id" element={<UserJobDetailPage />} />
-          <Route path="/my-jobs/:id/review" element={<LeaveReviewPage />} />
-          <Route path="/my-jobs/:id/edit" element={<EditJobRequestPage />} />
+          {/* Homeowner Dashboard Routes (fixed nested paths) */}
+          <Route path="/homeowner" element={<HomeownerDashboardLayout />}>
+            <Route index element={<HomeownerDashboardPage />} />
+            <Route path="my-jobs" element={<UserJobsPage />} />
+            <Route path="my-jobs/:id" element={<UserJobDetailPage />} />
+            <Route path="my-jobs/:id/edit" element={<EditJobRequestPage />} />
+            <Route path="my-jobs/:id/review" element={<LeaveReviewPage />} />
+            <Route path="request" element={<RequestJobPage />} />
+          </Route>
 
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />
