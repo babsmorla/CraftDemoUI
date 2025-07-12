@@ -29,7 +29,7 @@ const dummyUserJobs = [
     clientPhone: '0244123456',
     clientEmail: 'ama@gmail.com',
     images: [],
-    status: 'pending',
+    status: 'completed',
     createdAt: '2025-07-01T12:00',
     completedAt: '2025-07-18T16:00',
     artisanReview: {

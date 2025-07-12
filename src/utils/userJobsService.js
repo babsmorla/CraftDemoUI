@@ -1,8 +1,8 @@
 // Updated userJobsService for single-user simplicity
 
-import dummyUserJobs from "../pages/data/dummyUserJobs";
+import { jobs as userJobs } from "../pages/data/dummyData";
 
-let jobs = [...dummyUserJobs];
+let jobs = [...userJobs];
 
 export const getJobsForUser = () => {
   return jobs;

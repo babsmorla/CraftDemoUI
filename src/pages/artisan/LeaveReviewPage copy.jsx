@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import dummyUserJobs from '../data/dummyUserJobs';
+import { jobs as userJobs } from "../pages/data/dummyData";
 
 const LeaveReviewPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const job = dummyUserJobs.find(job => job.id === id);
+  const job = userJobs.find(job => job.id === id);
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 

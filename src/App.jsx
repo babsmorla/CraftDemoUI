@@ -41,7 +41,20 @@ import ArtisanAddServicesPage from "./pages/artisan/ArtisanAddServicesPage";
 import ArtisanEditServicesPage from "./pages/artisan/ArtisanEditServicesPage";
 import ArtisanServicesViewPage from "./pages/artisan/ArtisanServicesViewPage";
 import ProfileEditPage from "./pages/artisan/ProfileEditPage";
-import VerificationUploadPage from "./pages/artisan/VerificationUploadPage";
+import ArtisanVerificationPage from "./pages/artisan/ArtisanVerificationPage";
+import ArtisanVerificationStatusPage from "./pages/artisan/ArtisanVerificationStatusPage";
+
+import AdminLayout from "./components/layout/AdminLayout";
+import ReviewListPage from "./pages/artisan/ReviewListPage";
+import ReviewDetailPage from "./pages/artisan/ReviewDetailPage";
+import UserListPage from "./pages/artisan/UserListPage";
+import UserDetailPage from "./pages/artisan/UserDetailPage";
+import AdminVerificationPage from "./pages/artisan/AdminVerificationPage";
+import VerificationDetailPage from "./pages/artisan/VerificationDetailPage";
+import ReviewConfirmationPage from "./pages/artisan/ReviewConfirmationPage";
+import ArtisanReviewPage from "./pages/artisan/ArtisanReviewPage";
+import PostJobPage from "./pages/artisan/PostJobPage";
+import ReviewForm from "./pages/artisan/ReviewForm";
 
 function App() {
   return (
@@ -66,30 +79,54 @@ function App() {
             <Route path="services/add" element={<ArtisanAddServicesPage />} />
             <Route path="services/edit" element={<ArtisanEditServicesPage />} />
             <Route path="profile/edit" element={<ProfileEditPage />} />
-            <Route path="verification" element={<VerificationViewPage />} />
+            <Route path="verification" element={<ArtisanVerificationPage />} />
+
             <Route
-              path="verification/upload"
-              element={<VerificationUploadPage />}
+              path="verification/status"
+              element={<ArtisanVerificationStatusPage />}
             />
           </Route>
 
+          <Route
+            path="/review-confirmation/:artisanId"
+            element={<ReviewConfirmationPage />}
+          />
+
+          {/* <Route path="/review/:artisanId" element={<LeaveReviewPage
+           />} />
+          <Route
+            path="/review-confirmation/:artisanId"
+            element={<ReviewConfirmationPage />}
+          /> */}
           {/* Homeowner Dashboard Routes (fixed nested paths) */}
           <Route path="/homeowner" element={<HomeownerDashboardLayout />}>
             <Route index element={<HomeownerDashboardPage />} />
             <Route path="my-jobs" element={<UserJobsPage />} />
             <Route path="my-jobs/:id" element={<UserJobDetailPage />} />
             <Route path="my-jobs/:id/edit" element={<EditJobRequestPage />} />
-            <Route path="my-jobs/:id/review" element={<LeaveReviewPage />} />
+
+            <Route path="my-jobs/review/:artisanId" element={<ReviewForm />} />
+            <Route path="my-jobs/post-job" element={<PostJobPage />} />
+            {/* <Route path="my-jobs/:id/review" element={<LeaveReviewPage />} /> */}
             <Route path="request" element={<RequestJobPage />} />
           </Route>
 
+          {/* Admin Route */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="verification" element={<AdminVerificationPage />} />
+            <Route path="verify-detail" element={<VerificationDetailPage />} />
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="reviews" element={<ReviewListPage />} />
+            <Route path="reviews/:reviewId" element={<ReviewDetailPage />} />
+            <Route path="users" element={<UserListPage />} />
+            <Route path="users/:userId" element={<UserDetailPage />} />
+          </Route>
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
-          {/* Admin Route */}
-          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/adminold" element={<AdminDashboardPage />} />
 
           {/* 404 Page */}
           <Route

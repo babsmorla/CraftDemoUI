@@ -1,13 +1,13 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import dummyUserJobs from '../data/dummyUserJobs';
 import RatingStars from '../../components/ui/RatingStars';
+import { jobs as userJobs } from "../pages/data/dummyData";
 
 const UserSingleJobPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const job = dummyUserJobs.find(job => job.id === id);
+  const job = userJobs.find(job => job.id === id);
 
   if (!job) {
     return (

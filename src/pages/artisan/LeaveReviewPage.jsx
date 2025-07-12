@@ -1,57 +1,62 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import dummyUserJobs from '../data/dummyUserJobs';
-import RatingStars from '../../components/ui/RatingStars';
+import { useForm } from 'react-hook-form';
+import { jobs as userJobs } from '../data/dummyData';
 
 const LeaveReviewPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const jobIndex = dummyUserJobs.findIndex(job => job.id === id);
-  const job = dummyUserJobs[jobIndex];
-  const [rating, setRating] = useState(5);
-  const [reviewTitle, setReviewTitle] = useState('');
-  const [reviewText, setReviewText] = useState('');
-  const [images, setImages] = useState([]);
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages(files);
+  const job = userJobs.find(job => job.id === id);
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  if (!job) {
+    return <div className="p-6 text-center text-gray-500">Job not found.</div>;
+  }
+
+  const onSubmit = (data) => {
+    console.log('Review submitted:', data);
+    alert('Review submitted successfully!');
+    navigate(`/my-jobs/${id}`);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dummyUserJobs[jobIndex] = {
-      ...job,
-      rating,
-      reviewTitle,
-      reviewText,
-      reviewLeft: true,
-      reviewImages: images.map(file => URL.createObjectURL(file)),
-    };
-    navigate(`/my-jobs/${job.id}`);
-  };
-  if (!job) return <div className="text-center p-8">Job not found.</div>;
+
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Write a Review</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-md mx-auto p-6 bg-white shadow rounded">
+      <button onClick={() => navigate(-1)} className="text-blue-600 mb-4 hover:underline">← Back</button>
+      <h1 className="text-2xl font-bold mb-4">Leave a Review for {job.title}</h1>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="font-medium block mb-1">Your Rating</label>
-          <RatingStars rating={rating} onChange={setRating} />
+          <label className="block mb-1 font-medium">Rating (1-5)</label>
+          <input
+            type="number"
+            {...register('rating', { required: 'Rating is required', min: 1, max: 5 })}
+            className="w-full border rounded px-3 py-2"
+            placeholder="e.g., 5"
+          />
+          {errors.rating && <p className="text-red-500 text-sm mt-1">{errors.rating.message}</p>}
         </div>
+
         <div>
-          <label className="font-medium block mb-1">Review Title</label>
-          <input type="text" value={reviewTitle} onChange={e => setReviewTitle(e.target.value)} placeholder="Summarize your experience" className="w-full border rounded px-3 py-2" />
+          <label className="block mb-1 font-medium">Comment</label>
+          <textarea
+            {...register('comment', { required: 'Comment is required' })}
+            className="w-full border rounded px-3 py-2"
+            placeholder="Share your experience..."
+            rows={4}
+          ></textarea>
+          {errors.comment && <p className="text-red-500 text-sm mt-1">{errors.comment.message}</p>}
         </div>
-        <div>
-          <label className="font-medium block mb-1">Your Review</label>
-          <textarea value={reviewText} onChange={e => setReviewText(e.target.value)} placeholder="Share details of your experience" className="w-full border rounded px-3 py-2" rows={4}></textarea>
-        </div>
-        <div>
-          <label className="font-medium block mb-1">Upload Photos (Optional)</label>
-          <input type="file" accept="image/*" multiple onChange={handleImageChange} className="w-full border rounded px-3 py-2" />
-        </div>
-        <button type="submit" className="w-full py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Submit Review</button>
+
+        <button
+          type="submit"
+          className="w-full py-2 bg-green-600 text-white font-medium rounded hover:bg-green-700 transition"
+        >
+          Submit Review
+        </button>
       </form>
     </div>
   );
 };
+
 export default LeaveReviewPage;
