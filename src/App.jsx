@@ -37,11 +37,11 @@ import LeaveReviewPage from "./pages/artisan/LeaveReviewPage";
 import UserJobsPage from "./pages/artisan/UserJobsPage";
 import EditJobRequestPage from "./pages/artisan/EditJobRequestPage";
 
-
-
 import ArtisanAddServicesPage from "./pages/artisan/ArtisanAddServicesPage";
 import ArtisanEditServicesPage from "./pages/artisan/ArtisanEditServicesPage";
 import ArtisanServicesViewPage from "./pages/artisan/ArtisanServicesViewPage";
+import ProfileEditPage from "./pages/artisan/ProfileEditPage";
+import VerificationUploadPage from "./pages/artisan/VerificationUploadPage";
 
 function App() {
   return (
@@ -62,10 +62,15 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="jobs" element={<JobsPage />} />
             <Route path="jobs/:jobId" element={<JobDetailsPage />} />
-
             <Route path="services" element={<ArtisanServicesViewPage />} />
             <Route path="services/add" element={<ArtisanAddServicesPage />} />
             <Route path="services/edit" element={<ArtisanEditServicesPage />} />
+            <Route path="profile/edit" element={<ProfileEditPage />} />
+            <Route path="verification" element={<VerificationViewPage />} />
+            <Route
+              path="verification/upload"
+              element={<VerificationUploadPage />}
+            />
           </Route>
 
           {/* Homeowner Dashboard Routes (fixed nested paths) */}
