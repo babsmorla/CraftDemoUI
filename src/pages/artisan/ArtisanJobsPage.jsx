@@ -1,44 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { userJobs } from "../data/dummyData";
+import { artisanJobs } from "../data/dummyData";
 
-const UserJobsPage = () => {
+const ArtisanJobsPage = () => {
   const [activeTab, setActiveTab] = useState("pending");
   const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
-  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showDeclineModal, setShowDeclineModal] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
   const { register, handleSubmit, reset } = useForm();
 
   // In production, this would come from auth context
-  const currentUserId = "user_123";
+  const currentArtisanId = "art_789";
 
-  // Simulate API call to get user's jobs
+  // API CALL: This would be replaced with actual API fetch
   useEffect(() => {
-    const userJobsData = userJobs.filter(job => job.userId === currentUserId);
-    setJobs(userJobsData);
+    // Simulating API call
+    const artisanJobsData = artisanJobs.filter(job => job.artisanId === currentArtisanId);
+    setJobs(artisanJobsData);
   }, []);
 
-  // Handle job cancellation
-  const handleCancel = (data) => {
+  // API CALL: This would be an actual API call in production
+  const handleDecline = (data) => {
     if (!selectedJobId) return;
 
+    // Simulating API response
     const updatedJobs = jobs.map(job => 
       job.id === selectedJobId ? { 
         ...job, 
-        status: "cancelled",
-        cancellationReason: data.reason
+        status: "declined",
+        declineReason: data.reason
       } : job
     );
     
     setJobs(updatedJobs);
-    setShowCancelModal(false);
+    setShowDeclineModal(false);
     setSelectedJobId(null);
     reset();
   };
 
-  // Count jobs by status
+  // API CALL: Accept job
+  const handleAcceptJob = (jobId) => {
+    const updatedJobs = jobs.map(job => 
+      job.id === jobId ? { ...job, status: "accepted" } : job
+    );
+    setJobs(updatedJobs);
+  };
+
+  // API CALL: Mark job as completed
+  const handleCompleteJob = (jobId) => {
+    const updatedJobs = jobs.map(job => 
+      job.id === jobId ? { ...job, status: "completed" } : job
+    );
+    setJobs(updatedJobs);
+  };
+
+  // Helper functions
   const getStatusCount = (tab) => {
     return jobs.filter(job => {
       if (tab === "completed") return job.status === "completed";
@@ -49,7 +67,6 @@ const UserJobsPage = () => {
     }).length;
   };
 
-  // Filter jobs based on active tab
   const filteredJobs = jobs.filter(job => {
     if (activeTab === "completed") return job.status === "completed";
     if (activeTab === "active") return job.status === "accepted";
@@ -58,7 +75,6 @@ const UserJobsPage = () => {
     return job.status === "pending";
   });
 
-  // Status colors mapping
   const statusColors = {
     pending: "bg-yellow-100 text-yellow-800",
     accepted: "bg-blue-100 text-blue-800",
@@ -67,7 +83,6 @@ const UserJobsPage = () => {
     declined: "bg-purple-100 text-purple-800",
   };
 
-  // Format date
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-GB', {
       day: 'numeric',
@@ -78,15 +93,15 @@ const UserJobsPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      {/* Cancel Job Modal */}
-      {showCancelModal && (
+      {/* Decline Reason Modal */}
+      {showDeclineModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl w-full max-w-md p-6 shadow-xl">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Cancel Job Request</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Reason for Declining</h3>
               <button 
                 onClick={() => {
-                  setShowCancelModal(false);
+                  setShowDeclineModal(false);
                   reset();
                 }}
                 className="text-gray-500 hover:text-gray-700"
@@ -96,16 +111,16 @@ const UserJobsPage = () => {
                 </svg>
               </button>
             </div>
-            <form onSubmit={handleSubmit(handleCancel)}>
+            <form onSubmit={handleSubmit(handleDecline)}>
               <div className="mb-4">
                 <label htmlFor="reason" className="block text-sm font-medium text-gray-700 mb-1">
-                  Why are you canceling this job?
+                  Please explain why you're declining this job
                 </label>
                 <textarea
                   id="reason"
                   rows={4}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                  placeholder="I need to cancel because..."
+                  placeholder="I need to decline because..."
                   {...register("reason", { required: "Reason is required" })}
                 />
               </div>
@@ -113,7 +128,7 @@ const UserJobsPage = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setShowCancelModal(false);
+                    setShowDeclineModal(false);
                     reset();
                   }}
                   className="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition"
@@ -124,7 +139,7 @@ const UserJobsPage = () => {
                   type="submit"
                   className="flex-1 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition"
                 >
-                  Confirm Cancellation
+                  Confirm Decline
                 </button>
               </div>
             </form>
@@ -136,40 +151,44 @@ const UserJobsPage = () => {
       <div className="mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">My Job Requests</h1>
+            <h1 className="text-2xl font-bold text-gray-800">
+              My Job Requests
+            </h1>
             <p className="text-gray-600 mt-1">
-              John Doe • john.doe@example.com
+              Kwame's Plumbing Services • kwame.plumbing@example.com
             </p>
           </div>
           <button
-            onClick={() => navigate("/user/post-job")}
+            onClick={() => navigate("/artisan/profile/edit")}
             className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm w-full sm:w-auto text-center"
           >
-            Post New Job
+            Edit Profile
           </button>
         </div>
 
         {/* Status Tabs */}
         <div className="flex flex-wrap gap-1 border-b border-gray-200 mb-6 pb-1">
-          {["pending", "active", "completed", "cancelled", "declined"].map((tab) => (
-            <button
-              key={tab}
-              className={`py-3 px-4 font-medium text-sm transition-colors whitespace-nowrap relative ${
-                activeTab === tab
-                  ? "text-indigo-600 font-semibold"
-                  : "text-gray-500 hover:text-gray-700"
-              }`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              <span className="ml-2 bg-gray-200 text-gray-700 rounded-full px-2 py-0.5 text-xs">
-                {getStatusCount(tab)}
-              </span>
-              {activeTab === tab && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600"></div>
-              )}
-            </button>
-          ))}
+          {["pending", "active", "completed", "cancelled", "declined"].map(
+            (tab) => (
+              <button
+                key={tab}
+                className={`py-3 px-4 font-medium text-sm transition-colors whitespace-nowrap relative ${
+                  activeTab === tab
+                    ? "text-indigo-600 font-semibold"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                <span className="ml-2 bg-gray-200 text-gray-700 rounded-full px-2 py-0.5 text-xs">
+                  {getStatusCount(tab)}
+                </span>
+                {activeTab === tab && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600"></div>
+                )}
+              </button>
+            )
+          )}
         </div>
       </div>
 
@@ -199,14 +218,6 @@ const UserJobsPage = () => {
                 ? "You don't have any pending job requests at the moment."
                 : `You don't have any ${activeTab} jobs at the moment.`}
             </p>
-            {activeTab === "pending" && (
-              <button
-                onClick={() => navigate("/user/post-job")}
-                className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-              >
-                Post Your First Job
-              </button>
-            )}
           </div>
         </div>
       ) : (
@@ -245,7 +256,9 @@ const UserJobsPage = () => {
                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
                       </svg>
-                      <span>Scheduled: {formatDate(job.scheduledAt)}</span>
+                      <span>
+                        Scheduled: {formatDate(job.scheduledAt)}
+                      </span>
                     </div>
                   </div>
                   <div className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-lg text-sm font-semibold">
@@ -257,39 +270,36 @@ const UserJobsPage = () => {
                   {job.description}
                 </p>
 
-                {/* Artisan Information */}
-                {job.artisan && !["cancelled", "declined"].includes(job.status) && (
+                {/* Customer Information Section */}
+                {job.user && (
                   <div className="mb-4 p-4 bg-gray-50 rounded-lg">
                     <div className="flex items-center mb-3">
                       <div className="bg-indigo-100 text-indigo-800 rounded-xl w-10 h-10 flex items-center justify-center font-bold">
-                        {job.artisan.businessName.charAt(0).toUpperCase()}
+                        {job.user.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="ml-3">
-                        <p className="text-sm font-medium">{job.artisan.name}</p>
-                        <p className="text-xs text-gray-500">{job.artisan.businessName}</p>
-                      </div>
-                      <div className="ml-auto flex items-center bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">
-                        ⭐ {job.artisan.rating}
+                        <p className="text-sm font-medium">{job.user.name}</p>
+                        <p className="text-xs text-gray-500">{job.user.location}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <a 
-                        href={`tel:${job.artisan.phone}`}
+                        href={`tel:${job.user.phone}`}
                         className="flex items-center text-blue-600 hover:text-blue-800"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
-                        {job.artisan.phone}
+                        {job.user.phone}
                       </a>
                       <a 
-                        href={`mailto:${job.artisan.email}`}
+                        href={`mailto:${job.user.email}`}
                         className="flex items-center text-blue-600 hover:text-blue-800"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        {job.artisan.email}
+                        {job.user.email}
                       </a>
                     </div>
                   </div>
@@ -309,42 +319,40 @@ const UserJobsPage = () => {
                   </div>
                 )}
 
-                {/* Action Buttons */}
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
                   <button
-                    onClick={() => navigate(`/homeowner/my-jobs/${job.id}`)}
+                    onClick={() => navigate(`/artisan/jobs/view/${job.id}`)}
                     className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                   >
                     View Details
                   </button>
 
                   {job.status === "pending" && (
-                    <button
-                      onClick={() => {
-                        setSelectedJobId(job.id);
-                        setShowCancelModal(true);
-                      }}
-                      className="px-3 py-1.5 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
-                    >
-                      Cancel Request
-                    </button>
+                    <>
+                      <button
+                        onClick={() => {
+                          setSelectedJobId(job.id);
+                          setShowDeclineModal(true);
+                        }}
+                        className="px-3 py-1.5 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                      >
+                        Decline Job
+                      </button>
+                      <button
+                        onClick={() => handleAcceptJob(job.id)}
+                        className="px-3 py-1.5 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
+                      >
+                        Accept Job
+                      </button>
+                    </>
                   )}
 
-                  {job.status === "completed" && !job.reviewId && (
+                  {job.status === "accepted" && (
                     <button
-                      onClick={() => navigate(`/user/my-jobs/${job.id}/review`)}
+                      onClick={() => handleCompleteJob(job.id)}
                       className="px-3 py-1.5 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
                     >
-                      Leave Review
-                    </button>
-                  )}
-
-                  {job.status === "completed" && job.reviewId && (
-                    <button
-                      onClick={() => navigate(`/homeowner/my-jobs/${job.id}/review`)}
-                      className="px-3 py-1.5 text-sm bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
-                    >
-                      View Review
+                      Mark as Completed
                     </button>
                   )}
                 </div>
@@ -357,4 +365,4 @@ const UserJobsPage = () => {
   );
 };
 
-export default UserJobsPage;
+export default ArtisanJobsPage;

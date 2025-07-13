@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { reviews } from "../data/dummyData"
+import { reviewData } from "../data/dummyData";
 
 function ReviewListPage() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredReviews = reviews.filter(review => {
-    const matchesFilter = filter === "all" || 
-                         (filter === "flagged" && review.flagged) || 
-                         (filter === "pending" && review.status === "pending");
-    
-    const matchesSearch = review.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          review.homeownerName.toLowerCase().includes(searchTerm.toLowerCase());
-    
+  const filteredReviews = reviewData.filter((review) => {
+    const matchesFilter =
+      filter === "all" ||
+      (filter === "flagged" && review.flagged) ||
+      (filter === "pending" && review.status === "pending");
+
+    const matchesSearch =
+      review.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      review.user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      review.artisan.name.toLowerCase().includes(searchTerm.toLowerCase());
+
     return matchesFilter && matchesSearch;
   });
 
@@ -73,28 +76,60 @@ function ReviewListPage() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
-                        <div className="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10" />
+                        <img 
+                          className="h-10 w-10 rounded-full object-cover" 
+                          src={review.user.profilePic} 
+                          alt={review.user.name}
+                          onError={(e) => {
+                            e.target.onerror = null; 
+                            e.target.src = "/profiles/default-user.jpg";
+                          }}
+                        />
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{review.homeownerName}</div>
-                        <div className="text-sm text-gray-500">{review.date.substring(0, 10)}</div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {review.user.name}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {new Date(review.date).toLocaleDateString()}
+                        </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
-                    Artisan ID: {review.artisanId.substring(0, 8)}
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-10 w-10">
+                        <img 
+                          className="h-10 w-10 rounded-full object-cover" 
+                          src={review.artisan.profilePic} 
+                          alt={review.artisan.name}
+                          onError={(e) => {
+                            e.target.onerror = null; 
+                            e.target.src = "/profiles/default-artisan.jpg";
+                          }}
+                        />
+                      </div>
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {review.artisan.name}
+                        </div>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <span className="text-yellow-500 text-lg">★</span>
-                      <span className="ml-1 text-gray-900 font-medium">{review.rating}</span>
+                      <span className="ml-1 text-gray-900 font-medium">
+                        {review.rating}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
                     {review.comment}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                       ${review.status === "approved" ? "bg-green-100 text-green-800" : ""}
                       ${review.status === "pending" ? "bg-yellow-100 text-yellow-800" : ""}
                       ${review.flagged ? "bg-red-100 text-red-800" : ""}`}

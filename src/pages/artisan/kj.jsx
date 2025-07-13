@@ -6,18 +6,24 @@ import { artisans } from "./dummyData";
 function ArtisanReviewPage() {
   const { artisanId } = useParams();
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // Find the artisan being reviewed
-  const artisan = artisans.find(a => a.id === artisanId);
-  
+  const artisan = artisans.find((a) => a.id === artisanId);
+
   if (!artisan) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8 text-center">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Artisan Not Found</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          Artisan Not Found
+        </h2>
         <button
           onClick={() => navigate("/")}
           className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
@@ -30,7 +36,7 @@ function ArtisanReviewPage() {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    
+
     try {
       // Create review object (matches your dummy data structure)
       const newReview = {
@@ -43,22 +49,22 @@ function ArtisanReviewPage() {
         status: "pending",
         flagged: false,
         flaggedReason: "",
-        homeownerName: "Ama Boateng" // Would come from current user
+        userName: "Ama Boateng", // Would come from current user
       };
-      
+
       // In a real app, you would send this to your API
       console.log("Submitting review:", newReview);
-      
+
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Redirect to confirmation page
-      navigate(`/review-confirmation/${artisanId}`, { 
-        state: { 
+      navigate(`/review-confirmation/${artisanId}`, {
+        state: {
           review: newReview,
           artisanName: artisan.name,
-          businessName: artisan.businessName
-        } 
+          businessName: artisan.businessName,
+        },
       });
     } catch (error) {
       console.error("Review submission failed:", error);
@@ -81,20 +87,24 @@ function ArtisanReviewPage() {
           <div className="flex flex-col md:flex-row items-center mb-8">
             <div className="bg-gray-200 border-2 border-dashed rounded-xl w-24 h-24 mb-4 md:mb-0 md:mr-6" />
             <div className="text-center md:text-left">
-              <h2 className="text-xl font-bold text-gray-800">{artisan.name}</h2>
+              <h2 className="text-xl font-bold text-gray-800">
+                {artisan.name}
+              </h2>
               <p className="text-gray-600">{artisan.businessName}</p>
               <div className="flex items-center justify-center md:justify-start mt-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <span 
-                      key={i} 
-                      className={`text-2xl ${i < artisan.rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                    <span
+                      key={i}
+                      className={`text-2xl ${i < artisan.rating ? "text-yellow-500" : "text-gray-300"}`}
                     >
                       ★
                     </span>
                   ))}
                 </div>
-                <span className="ml-2 text-gray-600">{artisan.rating} ({artisan.completedJobs} jobs)</span>
+                <span className="ml-2 text-gray-600">
+                  {artisan.rating} ({artisan.completedJobs} jobs)
+                </span>
               </div>
             </div>
           </div>
@@ -133,9 +143,9 @@ function ArtisanReviewPage() {
               )}
               <input
                 type="hidden"
-                {...register("rating", { 
+                {...register("rating", {
                   required: "Rating is required",
-                  validate: value => value > 0 || "Please select a rating"
+                  validate: (value) => value > 0 || "Please select a rating",
                 })}
                 value={rating}
               />
@@ -146,25 +156,28 @@ function ArtisanReviewPage() {
                 Share details of your experience
               </label>
               <textarea
-                {...register("comment", { 
+                {...register("comment", {
                   required: "Review comment is required",
-                  minLength: { 
-                    value: 20, 
-                    message: "Please provide more details (at least 20 characters)" 
+                  minLength: {
+                    value: 20,
+                    message:
+                      "Please provide more details (at least 20 characters)",
                   },
                   maxLength: {
                     value: 500,
-                    message: "Review is too long (max 500 characters)"
-                  }
+                    message: "Review is too long (max 500 characters)",
+                  },
                 })}
                 rows={5}
                 className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
-                  errors.comment ? 'border-red-500' : ''
+                  errors.comment ? "border-red-500" : ""
                 }`}
                 placeholder="What did you like or dislike? Would you recommend this artisan to others?"
               ></textarea>
               {errors.comment && (
-                <p className="text-red-500 text-sm mt-1">{errors.comment.message}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.comment.message}
+                </p>
               )}
             </div>
 
@@ -174,19 +187,37 @@ function ArtisanReviewPage() {
                 disabled={isSubmitting || rating === 0}
                 className={`w-full px-6 py-3 rounded-lg font-medium ${
                   isSubmitting || rating === 0
-                    ? 'bg-indigo-400 cursor-not-allowed' 
-                    : 'bg-indigo-600 hover:bg-indigo-700'
+                    ? "bg-indigo-400 cursor-not-allowed"
+                    : "bg-indigo-600 hover:bg-indigo-700"
                 } text-white transition-colors`}
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Submitting...
                   </span>
-                ) : 'Submit Review'}
+                ) : (
+                  "Submit Review"
+                )}
               </button>
             </div>
           </form>

@@ -19,8 +19,8 @@ import HomeownerDashboardPage from "./pages/homeowner/HomeownerDashboardPage";
 // Artisan pages
 import DashboardPage from "./pages/artisan/DashboardPage";
 import ProfilePage from "./pages/artisan/ProfilePage";
-import JobsPage from "./pages/artisan/JobsPage";
-import JobDetailsPage from "./pages/artisan/JobsDetailPage";
+
+
 import RequestJobPage from "./pages/artisan/RequestJobPage";
 
 // Auth pages
@@ -33,7 +33,7 @@ import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 
 // User job management pages
 import UserJobDetailPage from "./pages/artisan/UserJobDetailPage";
-import LeaveReviewPage from "./pages/artisan/LeaveReviewPage";
+
 import UserJobsPage from "./pages/artisan/UserJobsPage";
 import EditJobRequestPage from "./pages/artisan/EditJobRequestPage";
 
@@ -51,10 +51,11 @@ import UserListPage from "./pages/artisan/UserListPage";
 import UserDetailPage from "./pages/artisan/UserDetailPage";
 import AdminVerificationPage from "./pages/artisan/AdminVerificationPage";
 import VerificationDetailPage from "./pages/artisan/VerificationDetailPage";
-import ReviewConfirmationPage from "./pages/artisan/ReviewConfirmationPage";
-import ArtisanReviewPage from "./pages/artisan/ArtisanReviewPage";
+
 import PostJobPage from "./pages/artisan/PostJobPage";
 import ReviewForm from "./pages/artisan/ReviewForm";
+import ArtisanJobDetailPage from "./pages/artisan/ArtisanJobDetailPage";
+import ArtisanJobsPage from "./pages/artisan/ArtisanJobsPage";
 
 function App() {
   return (
@@ -73,24 +74,18 @@ function App() {
           <Route path="/artisan" element={<DashboardLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path="profile" element={<ProfilePage />} />
-            <Route path="jobs" element={<JobsPage />} />
-            <Route path="jobs/:jobId" element={<JobDetailsPage />} />
+            <Route path="jobs" element={<ArtisanJobsPage />} />
+            <Route path="jobs/view/:jobId" element={<ArtisanJobDetailPage />} />
             <Route path="services" element={<ArtisanServicesViewPage />} />
             <Route path="services/add" element={<ArtisanAddServicesPage />} />
             <Route path="services/edit" element={<ArtisanEditServicesPage />} />
             <Route path="profile/edit" element={<ProfileEditPage />} />
             <Route path="verification" element={<ArtisanVerificationPage />} />
-
             <Route
               path="verification/status"
               element={<ArtisanVerificationStatusPage />}
             />
           </Route>
-
-          <Route
-            path="/review-confirmation/:artisanId"
-            element={<ReviewConfirmationPage />}
-          />
 
           {/* <Route path="/review/:artisanId" element={<LeaveReviewPage
            />} />
@@ -102,8 +97,8 @@ function App() {
           <Route path="/homeowner" element={<HomeownerDashboardLayout />}>
             <Route index element={<HomeownerDashboardPage />} />
             <Route path="my-jobs" element={<UserJobsPage />} />
-            <Route path="my-jobs/:id" element={<UserJobDetailPage />} />
-            <Route path="my-jobs/:id/edit" element={<EditJobRequestPage />} />
+            <Route path="my-jobs/:jobId" element={<UserJobDetailPage />} />
+            <Route path="my-jobs/:jobId/edit" element={<EditJobRequestPage />} />
 
             <Route path="my-jobs/review/:artisanId" element={<ReviewForm />} />
             <Route path="my-jobs/post-job" element={<PostJobPage />} />

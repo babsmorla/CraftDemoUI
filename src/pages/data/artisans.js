@@ -28,6 +28,11 @@ const artisans = [
       "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       "https://images.unsplash.com/photo-1594818379496-da1e345b0ded?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
     ],
+
+
+
+
+    
     reviews: [
       {
         id: "1",

@@ -2,7 +2,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { jobs } from "../data/dummyData";
+import { userJobs } from "../data/dummyData";
 
 const PostJobPage = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const PostJobPage = () => {
     };
     
     // In a real app, this would be an API call
-    jobs.push(newJob);
+    userJobs.push(newJob);
     
     // Simulate API delay
     setTimeout(() => {

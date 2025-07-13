@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaPhone, FaEnvelope, FaTools, FaEdit, FaTimes, FaCheckCircle } from "react-icons/fa";
-import { userJobs } from "../data/dummyData"; // Import from dummy data file
+import { artisanJobs } from "../data/dummyData"; // Import from dummy data file
 
-const UserJobDetailPage = () => {
+const ArtisanJobDetailPage = () => {
   const navigate = useNavigate();
   const { jobId } = useParams();
   
-  // Find the specific job from imported userJobs array
-  const job = userJobs.find(job => job.id === jobId);
+  // Find the specific job from imported artisanJobs array
+  const job = artisanJobs.find(job => job.id === jobId);
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [showCancelForm, setShowCancelForm] = useState(false);
-  const [cancelReason, setCancelReason] = useState("");
+  const [showDeclineForm, setShowDeclineForm] = useState(false);
+  const [declineReason, setDeclineReason] = useState("");
 
   if (!job) {
     return (
@@ -62,7 +62,7 @@ const UserJobDetailPage = () => {
                 {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
               </span>
               <span className="ml-3 text-gray-500 text-sm">
-                Created: {new Date(job.createdAt).toLocaleDateString()}
+                Posted: {new Date(job.createdAt).toLocaleDateString()}
               </span>
             </div>
           </div>
@@ -135,7 +135,7 @@ const UserJobDetailPage = () => {
                 <FaCalendarAlt />
               </div>
               <div className="ml-3">
-                <p className="text-sm text-gray-500">Created</p>
+                <p className="text-sm text-gray-500">Posted</p>
                 <p className="font-medium">
                   {new Date(job.createdAt).toLocaleDateString()}
                 </p>
@@ -168,48 +168,34 @@ const UserJobDetailPage = () => {
           </div>
         </div>
 
-        {/* Artisan Info */}
-        {job.artisan && job.status !== "cancelled" && job.status !== "declined" && (
+        {/* Customer Info */}
+        {job.user && (
           <div className="bg-gray-50 p-5 rounded-xl border border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Assigned Artisan</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Customer Information</h2>
             <div className="flex items-start">
               <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
                 <span className="text-gray-700 font-bold text-xl">
-                  {job.artisan.businessName.charAt(0)}
+                  {job.user.name.charAt(0)}
                 </span>
               </div>
               <div className="ml-4">
-                <h3 className="font-semibold text-lg">{job.artisan.businessName}</h3>
+                <h3 className="font-semibold text-lg">{job.user.name}</h3>
                 <div className="mt-3 space-y-2">
                   <div className="flex items-center text-gray-600">
                     <FaPhone className="mr-2 text-sm text-indigo-600" />
-                    <a href={`tel:${job.artisan.phone}`} className="hover:text-indigo-700">
-                      {job.artisan.phone}
+                    <a href={`tel:${job.user.phone}`} className="hover:text-indigo-700">
+                      {job.user.phone}
                     </a>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <FaEnvelope className="mr-2 text-sm text-indigo-600" />
-                    <a href={`mailto:${job.artisan.email}`} className="hover:text-indigo-700">
-                      {job.artisan.email}
+                    <a href={`mailto:${job.user.email}`} className="hover:text-indigo-700">
+                      {job.user.email}
                     </a>
                   </div>
-                  <div className="flex items-center mt-2">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg 
-                          key={i} 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          className={`h-4 w-4 ${i < Math.floor(job.artisan.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="ml-2 text-sm text-gray-500">
-                      {job.artisan.rating} ({job.artisan.completedJobs} jobs)
-                    </span>
+                  <div className="flex items-center text-gray-600">
+                    <FaMapMarkerAlt className="mr-2 text-sm text-indigo-600" />
+                    <span>{job.user.location}</span>
                   </div>
                 </div>
               </div>
@@ -224,52 +210,57 @@ const UserJobDetailPage = () => {
           {job.status === "pending" && (
             <>
               <button
-                onClick={() => setShowCancelForm(true)}
+                onClick={() => setShowDeclineForm(true)}
                 className="px-4 py-2.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors flex items-center justify-center gap-2 font-medium"
               >
                 <FaTimes />
-                Cancel Request
+                Decline Job
               </button>
               <button
-                onClick={() => navigate(`/user/jobs/${job.id}/edit`)}
-                className="px-4 py-2.5 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-colors flex items-center justify-center gap-2 font-medium"
+                onClick={() => {
+                  // In a real app, you would update the job status via API here
+                  alert("Job accepted successfully!");
+                }}
+                className="px-4 py-2.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors flex items-center justify-center gap-2 font-medium"
               >
-                <FaEdit />
-                Edit Details
+                <FaCheckCircle />
+                Accept Job
               </button>
             </>
           )}
           
           {job.status === "accepted" && (
-            <button
-              onClick={() => window.location.href = `tel:${job.artisan.phone}`}
-              className="px-4 py-2.5 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition-colors flex items-center justify-center gap-2 font-medium"
-            >
-              <FaPhone />
-              Call Artisan
-            </button>
-          )}
-          
-          {job.status === "completed" && !job.reviewId && (
-            <button
-              onClick={() => navigate(`/user/jobs/${job.id}/review`)}
-              className="px-4 py-2.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors flex items-center justify-center gap-2 font-medium"
-            >
-              <FaCheckCircle />
-              Leave Review
-            </button>
+            <>
+              <button
+                onClick={() => window.location.href = `tel:${job.user.phone}`}
+                className="px-4 py-2.5 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition-colors flex items-center justify-center gap-2 font-medium"
+              >
+                <FaPhone />
+                Call Customer
+              </button>
+              <button
+                onClick={() => {
+                  // In a real app, you would mark job as completed via API
+                  alert("Job marked as completed!");
+                }}
+                className="px-4 py-2.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors flex items-center justify-center gap-2 font-medium"
+              >
+                <FaCheckCircle />
+                Mark as Completed
+              </button>
+            </>
           )}
         </div>
       </div>
 
-      {/* Cancel Form Modal */}
-      {showCancelForm && (
+      {/* Decline Form Modal */}
+      {showDeclineForm && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl w-full max-w-md p-6 shadow-xl">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Cancel Job Request</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Decline Job</h3>
               <button 
-                onClick={() => setShowCancelForm(false)}
+                onClick={() => setShowDeclineForm(false)}
                 className="text-gray-500 hover:text-gray-700"
               >
                 <FaTimes />
@@ -277,13 +268,13 @@ const UserJobDetailPage = () => {
             </div>
             
             <p className="text-gray-600 mb-4">
-              Please explain why you're canceling this job request
+              Please explain why you're declining this job
             </p>
             
             <textarea
-              value={cancelReason}
-              onChange={(e) => setCancelReason(e.target.value)}
-              placeholder="e.g. I found another artisan, the issue resolved itself..."
+              value={declineReason}
+              onChange={(e) => setDeclineReason(e.target.value)}
+              placeholder="e.g. I'm not available, outside my expertise..."
               className="w-full p-3 border rounded-lg mb-4 min-h-[120px] focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               autoFocus
             />
@@ -291,20 +282,20 @@ const UserJobDetailPage = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => {
-                  if (cancelReason.trim()) {
+                  if (declineReason.trim()) {
                     // In a real app, you would update the job status via API here
-                    alert(`Job request canceled. Reason: ${cancelReason}`);
-                    setShowCancelForm(false);
+                    alert(`Job declined. Reason: ${declineReason}`);
+                    setShowDeclineForm(false);
                   }
                 }}
                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition flex-1 font-medium flex items-center justify-center gap-2"
-                disabled={!cancelReason.trim()}
+                disabled={!declineReason.trim()}
               >
                 <FaTimes />
-                Confirm Cancellation
+                Confirm Decline
               </button>
               <button
-                onClick={() => setShowCancelForm(false)}
+                onClick={() => setShowDeclineForm(false)}
                 className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition flex-1 font-medium"
               >
                 Cancel
@@ -317,4 +308,4 @@ const UserJobDetailPage = () => {
   );
 };
 
-export default UserJobDetailPage;
+export default ArtisanJobDetailPage;

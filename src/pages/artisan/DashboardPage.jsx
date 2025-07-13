@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 // import RequestCard from "../../components/ui/RequestCard";
 
 const DashboardPage = () => {
   // Sample data
- 
+
   const recentReviews = [
     {
       id: "1",
@@ -136,7 +136,7 @@ const DashboardPage = () => {
                       </span>
                     </div>
                     <div className="mt-2 text-sm text-gray-600">
-                      From: {request.homeownerName}
+                      From: {request.userName}
                     </div>
                     <p className="mt-2 text-gray-600 text-sm">
                       {request.description}
