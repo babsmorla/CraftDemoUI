@@ -332,7 +332,7 @@ const UserJobsPage = () => {
 
                   {job.status === "completed" && !job.reviewId && (
                     <button
-                      onClick={() => navigate(`/user/my-jobs/${job.id}/review`)}
+                      onClick={() => navigate(`/homeowner/my-jobs/${job.id}/review`)}
                       className="px-3 py-1.5 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors"
                     >
                       Leave Review

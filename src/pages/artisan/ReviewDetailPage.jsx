@@ -1,18 +1,14 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { reviewData } from "../data/dummyData";
+import { AdminReview } from "../data/dummyData";
 
-function ReviewDetailPage() {
+function AdminReviewDetailPage() {
   const navigate = useNavigate();
   const { reviewId } = useParams();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit } = useForm();
 
-  const review = reviewData.find((r) => r.id === reviewId);
+  const review = AdminReview.find((r) => r.id === reviewId);
 
   if (!review) {
     return (
@@ -30,11 +26,20 @@ function ReviewDetailPage() {
     );
   }
 
-  const onSubmit = (data) => {
-    console.log("Review action:", data);
-    // In real app: API call to update review status
+  const onSubmit = () => {
+    // In real app: API call to delete review
     navigate("/admin/reviews");
   };
+
+  // Determine status based on rating
+  const getStatus = (rating) => {
+    if (rating === 1) return "Bad";
+    if (rating >= 2 && rating <= 4) return "Fair";
+    if (rating === 5) return "Excellent";
+    return "Unknown";
+  };
+
+  const status = getStatus(review.rating);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -81,11 +86,11 @@ function ReviewDetailPage() {
             </div>
             <span
               className={`px-3 py-1 rounded-full text-sm font-medium
-              ${review.status === "approved" ? "bg-green-100 text-green-800" : ""}
-              ${review.status === "pending" ? "bg-yellow-100 text-yellow-800" : ""}
-              ${review.flagged ? "bg-red-100 text-red-800" : ""}`}
+              ${status === "Excellent" ? "bg-green-100 text-green-800" : ""}
+              ${status === "Fair" ? "bg-yellow-100 text-yellow-800" : ""}
+              ${status === "Bad" ? "bg-red-100 text-red-800" : ""}`}
             >
-              {review.flagged ? "Flagged" : review.status}
+              {status}
             </span>
           </div>
 
@@ -122,7 +127,7 @@ function ReviewDetailPage() {
                 <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
                   <img 
                     src={review.artisan.profilePic} 
-                    alt={review.artisan.name}
+                    alt={review.artisan.businessName}
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -131,7 +136,10 @@ function ReviewDetailPage() {
                   />
                 </div>
                 <div className="ml-4">
-                  <p className="font-medium">{review.artisan.name}</p>
+                  <p className="font-medium">{review.artisan.businessName}</p>
+                  <p className="text-sm text-gray-500">
+                    Job ID: {review.jobId}
+                  </p>
                 </div>
               </div>
             </div>
@@ -143,97 +151,17 @@ function ReviewDetailPage() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-gray-700">{review.comment}</p>
             </div>
-
-            {review.flagged && (
-              <div className="mt-4 bg-red-50 p-4 rounded-lg border border-red-100">
-                <h4 className="font-medium text-red-800 mb-1">
-                  Flagged Reason
-                </h4>
-                <p className="text-red-700">
-                  {review.flaggedReason || "This review has been flagged by the system"}
-                </p>
-              </div>
-            )}
           </div>
 
-          {/* Action Form */}
+          {/* Delete Form */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
               <label className="block text-gray-700 mb-2 font-medium">
-                Review Action
+                Admin Action
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <label className="flex items-center space-x-3 p-4 border border-gray-300 rounded-lg cursor-pointer has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50">
-                  <input
-                    type="radio"
-                    value="approve"
-                    defaultChecked={review.status === "approved"}
-                    {...register("action", { required: "Action is required" })}
-                    className="text-indigo-600 focus:ring-indigo-500"
-                  />
-                  <div>
-                    <span className="block text-sm font-medium text-gray-700">
-                      Approve
-                    </span>
-                    <span className="block text-sm text-gray-500">
-                      Publish this review
-                    </span>
-                  </div>
-                </label>
-
-                <label className="flex items-center space-x-3 p-4 border border-gray-300 rounded-lg cursor-pointer has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50">
-                  <input
-                    type="radio"
-                    value="reject"
-                    defaultChecked={review.status === "rejected"}
-                    {...register("action", { required: "Action is required" })}
-                    className="text-indigo-600 focus:ring-indigo-500"
-                  />
-                  <div>
-                    <span className="block text-sm font-medium text-gray-700">
-                      Reject
-                    </span>
-                    <span className="block text-sm text-gray-500">
-                      Remove this review
-                    </span>
-                  </div>
-                </label>
-
-                <label className="flex items-center space-x-3 p-4 border border-gray-300 rounded-lg cursor-pointer has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50">
-                  <input
-                    type="radio"
-                    value="pending"
-                    defaultChecked={review.status === "pending"}
-                    {...register("action", { required: "Action is required" })}
-                    className="text-indigo-600 focus:ring-indigo-500"
-                  />
-                  <div>
-                    <span className="block text-sm font-medium text-gray-700">
-                      Keep Pending
-                    </span>
-                    <span className="block text-sm text-gray-500">
-                      No change
-                    </span>
-                  </div>
-                </label>
-              </div>
-              {errors.action && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.action.message}
-                </p>
-              )}
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-gray-700 mb-2 font-medium">
-                Admin Notes (Optional)
-              </label>
-              <textarea
-                {...register("adminNotes")}
-                rows={3}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="Add any notes about this review decision..."
-              ></textarea>
+              <p className="text-sm text-gray-600 mb-4">
+                This action will permanently delete this review without notifying the user or artisan.
+              </p>
             </div>
 
             <div className="flex justify-end space-x-3">
@@ -246,9 +174,9 @@ function ReviewDetailPage() {
               </button>
               <button
                 type="submit"
-                className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700"
               >
-                Save Decision
+                Delete Review
               </button>
             </div>
           </form>
@@ -258,4 +186,4 @@ function ReviewDetailPage() {
   );
 }
 
-export default ReviewDetailPage;
+export default AdminReviewDetailPage;

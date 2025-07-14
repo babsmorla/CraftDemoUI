@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { jobs as userJobs } from '../data/dummyData';
+import { jobs as userJobs } from '../data/dataold';
 
 const LeaveReviewPage = () => {
   const { id } = useParams();
@@ -17,7 +17,7 @@ const LeaveReviewPage = () => {
   const onSubmit = (data) => {
     console.log('Review submitted:', data);
     alert('Review submitted successfully!');
-    navigate(`/my-jobs/${id}`);
+    navigate(`hom/my-jobs/${id}`);
   };
 
   return (

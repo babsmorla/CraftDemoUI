@@ -56,6 +56,7 @@ import PostJobPage from "./pages/artisan/PostJobPage";
 import ReviewForm from "./pages/artisan/ReviewForm";
 import ArtisanJobDetailPage from "./pages/artisan/ArtisanJobDetailPage";
 import ArtisanJobsPage from "./pages/artisan/ArtisanJobsPage";
+import LeaveReviewPage from "./pages/artisan/LeaveReviewPage";
 
 function App() {
   return (
@@ -87,12 +88,8 @@ function App() {
             />
           </Route>
 
-          {/* <Route path="/review/:artisanId" element={<LeaveReviewPage
-           />} />
-          <Route
-            path="/review-confirmation/:artisanId"
-            element={<ReviewConfirmationPage />}
-          /> */}
+
+
           {/* Homeowner Dashboard Routes (fixed nested paths) */}
           <Route path="/homeowner" element={<HomeownerDashboardLayout />}>
             <Route index element={<HomeownerDashboardPage />} />
@@ -102,7 +99,7 @@ function App() {
 
             <Route path="my-jobs/review/:artisanId" element={<ReviewForm />} />
             <Route path="my-jobs/post-job" element={<PostJobPage />} />
-            {/* <Route path="my-jobs/:id/review" element={<LeaveReviewPage />} /> */}
+            <Route path="my-jobs/:id/review" element={<LeaveReviewPage />} />
             <Route path="request" element={<RequestJobPage />} />
           </Route>
 
