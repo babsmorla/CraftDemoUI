@@ -27,151 +27,7 @@ export const users = [
     phone: "0209876543",
   },
 ];
-
-
-
-
-export const publicArtisanProfile = {
-    id: "art_001",
-    name: "Kwame Asare",
-    businessName: "Asare Woodworks",
-    profilePic: "/profiles/artisan1.jpg",
-    rating: 4.7,
-    reviewCount: 28,
-    verificationStatus: "verified",
-    location: "Accra, Ghana",
-    experience: "10 years",
-    hourlyRate: 50,
-    whatsapp: "+233123456789",
-    phone: "+233123456789",
-    description: "Master carpenter with over a decade of experience creating custom furniture and woodwork. Specializing in traditional Ghanaian designs with modern functionality. Committed to quality craftsmanship and customer satisfaction.",
-    specialties: ["Custom Furniture", "Cabinetry", "Wood Carving", "Home Decor"],
-    portfolio: [
-      "/portfolio/woodwork1.jpg",
-      "/portfolio/woodwork2.jpg",
-      "/portfolio/woodwork3.jpg",
-      "/portfolio/woodwork4.jpg",
-      "/portfolio/woodwork5.jpg",
-      "/portfolio/woodwork6.jpg",
-    ],
-    services: [
-      {
-        service: "Custom Dining Table",
-        description: "Handcrafted dining table with your choice of wood and design",
-        price: "GHS 1,200 - 3,500",
-        estimatedTime: "2-4 weeks"
-      },
-      {
-        service: "Bookshelf Unit",
-        description: "Custom-sized bookshelf with optional carving details",
-        price: "GHS 800 - 2,000",
-        estimatedTime: "1-3 weeks"
-      },
-      {
-        service: "Bed Frame",
-        description: "Solid wood bed frame with storage options",
-        price: "GHS 1,500 - 4,000",
-        estimatedTime: "3-5 weeks"
-      },
-    ],
-    pricingNotes: "• Prices vary based on material choice and complexity\n• 30% deposit required to begin work\n• Delivery available for additional fee",
-    reviews: [
-      {
-        id: "rev_001",
-        jobId: "job-01",
-        rating: 5,
-        comment: "Kwame built us a beautiful dining table that exceeded our expectations. The craftsmanship is exceptional!",
-        date: "2025-03-15T14:30:00Z",
-        user: {
-          id: "user_001",
-          name: "Ama Mensah",
-          profilePic: "/profiles/user1.jpg",
-        },
-      },
-      {
-        id: "rev_002",
-        jobId: "job-05",
-        rating: 4,
-        comment: "Good quality bookshelves, delivered on time. Would recommend.",
-        date: "2025-02-28T09:15:00Z",
-        user: {
-          id: "user_002",
-          name: "Kofi Ansah",
-          profilePic: "/profiles/user2.jpg",
-        },
-      },
-      {
-        id: "rev_003",
-        jobId: "job-08",
-        rating: 3,
-        comment: "The bed frame is sturdy but took longer than expected to complete.",
-        date: "2025-01-10T16:45:00Z",
-        user: {
-          id: "user_003",
-          name: "Esi Boateng",
-          profilePic: null,
-        },
-      },
-    ],
-  };
-
-
-
-
-
-export const artisanProfile = {
-  id: "art_789",
-  name: "Kofi Mensah",
-  email: "kofi@example.com",
-  profilePic: "/profiles/artisan1.jpg",
-  role: "artisan",
-  businessName: "Adinkra Crafts",
-  craft: "Wood Carving",
-  description: "Professional wood carver with 10 years of experience. Specializing in traditional Adinkra symbols and custom designs.",
-  rating: 4.7,
-  reviewCount: 42,
-  hourlyRate: 25,
-  specialties: ["Traditional Carvings", "Furniture", "Sculptures"],
-  location: "Kumasi, Ashanti Region",
-  experience: "10 years",
-  whatsapp: "+233201234567",
-  phone: "+233201234567",
-  portfolio: [
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
-    "https://images.unsplash.com/photo-1600566752355-35792bedcfea"
-  ],
-  accountStatus: "active",// "Suspended" 
-  verificationStatus: "verified", //"Not Verified"
-  stats: {
-    completedJobs: 42,
-    pendingJobs: 3,
-    declinedJobs: 2,
-    cancellationRate: 4.7
-  },
-  services: [
-  {
-    id: "svc_001",
-    service: "Wiring",
-    description: "Professional wiring service",
-    price: "GHS 250/hr",
-    estimatedTime: "Varies by project",
-  },
-  {
-    id: "svc_002",
-    service: "Installations",
-    description: "Professional installations service",
-    price: "GHS 300/hr",
-    estimatedTime: "Varies by project",
-  },
-],
-pricingNotes: `Prices are estimates and may vary based on project complexity.
-Minimum service charge: 1 hour.
-Materials not included in pricing.
-Free quotes available upon request.`,
-};
-
-
-      
+  
 
 export const artisans = [
   {
@@ -287,7 +143,221 @@ export const reviews = [
   },
 ];
 
-export const verificationRequests = [
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Artsans's Profile In Public
+export const publicArtisanProfile = {
+    id: "art_001",
+    name: "Kwame Asare",
+    businessName: "Asare Woodworks",
+    profilePic: "/profiles/artisan1.jpg",
+    rating: 4.7,
+    reviewCount: 28,
+    verificationStatus: "verified",
+    location: "Accra, Ghana",
+    experience: "10 years",
+    hourlyRate: 50,
+    whatsapp: "+233123456789",
+    phone: "+233123456789",
+    description: "Master carpenter with over a decade of experience creating custom furniture and woodwork. Specializing in traditional Ghanaian designs with modern functionality. Committed to quality craftsmanship and customer satisfaction.",
+    specialties: ["Custom Furniture", "Cabinetry", "Wood Carving", "Home Decor"],
+    portfolio: [
+      "/portfolio/woodwork1.jpg",
+      "/portfolio/woodwork2.jpg",
+      "/portfolio/woodwork3.jpg",
+      "/portfolio/woodwork4.jpg",
+      "/portfolio/woodwork5.jpg",
+      "/portfolio/woodwork6.jpg",
+    ],
+    services: [
+      {
+        service: "Custom Dining Table",
+        description: "Handcrafted dining table with your choice of wood and design",
+        price: "GHS 1,200 - 3,500",
+        estimatedTime: "2-4 weeks"
+      },
+      {
+        service: "Bookshelf Unit",
+        description: "Custom-sized bookshelf with optional carving details",
+        price: "GHS 800 - 2,000",
+        estimatedTime: "1-3 weeks"
+      },
+      {
+        service: "Bed Frame",
+        description: "Solid wood bed frame with storage options",
+        price: "GHS 1,500 - 4,000",
+        estimatedTime: "3-5 weeks"
+      },
+    ],
+    pricingNotes: "• Prices vary based on material choice and complexity\n• 30% deposit required to begin work\n• Delivery available for additional fee",
+    reviews: [
+      {
+        id: "rev_001",
+        jobId: "job-01",
+        rating: 5,
+        comment: "Kwame built us a beautiful dining table that exceeded our expectations. The craftsmanship is exceptional!",
+        date: "2025-03-15T14:30:00Z",
+        user: {
+          id: "user_001",
+          name: "Ama Mensah",
+          profilePic: "/profiles/user1.jpg",
+        },
+      },
+      {
+        id: "rev_002",
+        jobId: "job-05",
+        rating: 4,
+        comment: "Good quality bookshelves, delivered on time. Would recommend.",
+        date: "2025-02-28T09:15:00Z",
+        user: {
+          id: "user_002",
+          name: "Kofi Ansah",
+          profilePic: "/profiles/user2.jpg",
+        },
+      },
+      {
+        id: "rev_003",
+        jobId: "job-08",
+        rating: 3,
+        comment: "The bed frame is sturdy but took longer than expected to complete.",
+        date: "2025-01-10T16:45:00Z",
+        user: {
+          id: "user_003",
+          name: "Esi Boateng",
+          profilePic: null,
+        },
+      },
+    ],
+  };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const userProfilee = {
+  id: "user_123",
+  name: "Kwame Asare",
+  email: "kwame@example.com",
+  profilePic: "/profiles/user1.jpg",
+  role: "user",
+  joinedDate: "2023-05-15T08:30:00Z",
+  lastLogin: "2023-07-20T14:25:00Z",
+  location: "Accra, Osu",
+  phone: "0244123456",
+  stats: {
+    totalJobs: 5,
+    completedJobs: 3,
+    pendingJobs: 1,
+    cancelledJobs: 1
+  },
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Artisan Profile in on Personal Dashboard
+export const artisanProfile = {
+  id: "art_789",
+  name: "Kofi Mensah",
+  email: "kofi@example.com",
+  profilePic: "/profiles/artisan1.jpg",
+  role: "artisan",
+  businessName: "Adinkra Crafts",
+  craft: "Wood Carving",
+  description: "Professional wood carver with 10 years of experience. Specializing in traditional Adinkra symbols and custom designs.",
+  rating: 4.7,
+  reviewCount: 42,
+  hourlyRate: 25,
+  specialties: ["Traditional Carvings", "Furniture", "Sculptures"],
+  location: "Kumasi, Ashanti Region",
+  experience: "10 years",
+  whatsapp: "+233201234567",
+  phone: "+233201234567",
+  portfolio: [
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+    "https://images.unsplash.com/photo-1600566752355-35792bedcfea"
+  ],
+  accountStatus: "active",// "Suspended" 
+  verificationStatus: "verified", //"Not Verified"
+  stats: {
+    completedJobs: 42,
+    pendingJobs: 3,
+    declinedJobs: 2,
+    cancellationRate: 4.7
+  },
+  reviews: [
+      {
+        id: "rev_001",
+        jobId: "job-01",
+        rating: 5,
+        comment: "Kwame built us a beautiful dining table that exceeded our expectations. The craftsmanship is exceptional!",
+        date: "2025-03-15T14:30:00Z",
+        user: {
+          id: "user_001",
+          name: "Ama Mensah",
+          profilePic: "/profiles/user1.jpg",
+        },
+      },
+      {
+        id: "rev_002",
+        jobId: "job-05",
+        rating: 4,
+        comment: "Good quality bookshelves, delivered on time. Would recommend.",
+        date: "2025-02-28T09:15:00Z",
+        user: {
+          id: "user_002",
+          name: "Kofi Ansah",
+          profilePic: "/profiles/user2.jpg",
+        },
+      },
+      {
+        id: "rev_003",
+        jobId: "job-08",
+        rating: 3,
+        comment: "The bed frame is sturdy but took longer than expected to complete.",
+        date: "2025-01-10T16:45:00Z",
+        user: {
+          id: "user_003",
+          name: "Esi Boateng",
+          profilePic: null,
+        },
+      },
+    ],
+  services: [
+  {
+    id: "svc_001",
+    service: "Wiring",
+    description: "Professional wiring service",
+    price: "GHS 250/hr",
+    estimatedTime: "Varies by project",
+  },
+  {
+    id: "svc_002",
+    service: "Installations",
+    description: "Professional installations service",
+    price: "GHS 300/hr",
+    estimatedTime: "Varies by project",
+  },
+],
+pricingNotes: `Prices are estimates and may vary based on project complexity.
+Minimum service charge: 1 hour.
+Materials not included in pricing.
+Free quotes available upon request.`,
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const artisanVerificationRequest = [
   {
     id: "ver_123456",
     artisanId: "art_789",
@@ -348,41 +418,35 @@ export const verificationRequests = [
   },
 ];
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //for a particular user
-export const mockVerificationData = {
+export const artisanVerificationStatus = {
   id: "ver_123456789",
-  status: "rejected", // "approved", "rejected"
-  submittedAt: "2023-07-15T10:30:00.000Z",
-  reviewedAt: null,
+  verificationStatus: "approved", // "pending", "approved", "rejected"
+  submittedAt: "2025-07-01T09:30:00Z",
+  reviewedAt: "2025-07-04T15:20:00Z", // null if not yet reviewed
+  rejectionReason: null, // if rejected, will contain reason
   documents: [
-    { 
-      type: "id_front", 
-      url: "/uploads/id_front.jpg",
-      verified: false
-    },
-    { 
-      type: "id_back", 
-      url: "/uploads/id_back.jpg",
-      verified: false
-    },
-    { 
-      type: "address_proof", 
-      url: "/uploads/address_proof.pdf",
-      verified: false
-    },
-    { 
-      type: "business_reg", 
-      url: "/uploads/business_reg.pdf",
-      verified: false
-    }
-  ],
-  rejectionReason: "We cant Verify you now"
+    { type: "id_front", url: "/uploads/id_front.jpg", verified: true },
+    { type: "id_back", url: "/uploads/id_back.jpg", verified: true },
+    { type: "address_proof", url: "/uploads/address_proof.pdf", verified: true },
+    { type: "business_reg", url: "/uploads/business_reg.pdf", verified: true }
+  ]
 };
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // User Jobs and Artisan Jobs 
-
 export const userJobs = [
   {
     id: "job-1",
@@ -394,9 +458,9 @@ export const userJobs = [
     location: "Accra, Spintex Road",
     userId: "user_123",
     artisanId: "art_789",
-    status: "completed",
+    status: "pending",
     declineReason: "",
-    cancellationReason: "I have an urgent meeting to attend",
+    cancellationReason: "",
     images: [
       "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
       "https://images.unsplash.com/photo-1621544402532-78c290378588?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
@@ -417,10 +481,10 @@ export const userJobs = [
     scheduledAt: "2023-11-05T09:00:00Z",
     createdAt: "2023-10-28T14:15:00Z",
     location: "Kumasi, Asokwa",
-    userId: "user_456",
+    userId: "user_123",
     artisanId: "art_101",
-    status: "accepted",
-    declineReason: "",
+    status: "declined",
+    declineReason: "I cant work at the moment",
     cancellationReason: "",
     images: [
       "https://images.unsplash.com/photo-1585123388860-da6b0b0e67b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
@@ -441,7 +505,7 @@ export const userJobs = [
     scheduledAt: "2023-10-30T13:00:00Z",
     createdAt: "2023-10-25T11:20:00Z",
     location: "Tema, Community 18",
-    userId: "user_789",
+    userId: "user_123",
     artisanId: "art_202",
     status: "completed",
     declineReason: "",
@@ -460,8 +524,15 @@ export const userJobs = [
   }
 ];
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//User Jobs and Artisan Jobs 
 export const artisanJobs = [
+  
   {
     id: "job-101",
     title: "Kitchen Plumbing Repair",
@@ -532,244 +603,14 @@ export const artisanJobs = [
     }
   }
 ];
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-///// New Structur 
-
-export const userProfilee = {
-  id: "user_123",
-  name: "Kwame Asare",
-  email: "kwame@example.com",
-  profilePic: "/profiles/user1.jpg",
-  role: "user",
-  joinedDate: "2023-05-15T08:30:00Z",
-  lastLogin: "2023-07-20T14:25:00Z",
-  location: "Accra, Osu",
-  phone: "0244123456",
-  stats: {
-    totalJobs: 5,
-    completedJobs: 3,
-    pendingJobs: 1,
-    cancelledJobs: 1
-  },
-  jobs: [
-    {
-      id: "job-1",
-      title: "Fix leaking kitchen sink",
-      description: "The kitchen sink has been leaking near the pipe joint for 2 days...",
-      budget: "GHS 250",
-      scheduledAt: "2023-10-25T10:00:00Z",
-      createdAt: "2023-10-20T08:30:00Z",
-      location: "Accra, Spintex Road",
-      status: "declined",
-      declineReason: "Artisan was unavailable",
-      images: [
-        "https://images.unsplash.com/photo-1600566752355-35792bedcfea",
-        "https://images.unsplash.com/photo-1621544402532-78c290378588"
-      ],
-      artisan: {
-        id: "art_789",
-        businessName: "Kofi Plumbing Services",
-        rating: 4.7,
-        phone: "+233 24 123 4567",
-        email: "kofi.plumbing@example.com"
-      }
-    },
-    {
-      id: "job-2",
-      title: "Install ceiling fan",
-      description: "Need a ceiling fan installed in my living room...",
-      budget: "GHS 180",
-      scheduledAt: "2023-11-05T14:00:00Z",
-      createdAt: "2023-10-28T09:15:00Z",
-      location: "Accra, Osu",
-      status: "completed",
-      images: [],
-      artisan: {
-        id: "art_456",
-        businessName: "Ama Electrical Works",
-        rating: 4.9,
-        phone: "+233 20 987 6543",
-        email: "ama.electrical@example.com"
-      }
-    }
-  ],
-  userReviews: [
-    {
-      id: "rev_001",
-      jobId: "job-2",
-      artisanId: "art_456",
-      artisanName: "Ama Electrical Works",
-      rating: 5,
-      comment: "Excellent work! The fan was installed perfectly and works great.",
-      date: "2023-11-06T16:45:00Z",
-      images: []
-    },
-    {
-      id: "rev_002",
-      jobId: "job-3",
-      artisanId: "art_123",
-      artisanName: "Yaw Carpentry",
-      rating: 4,
-      comment: "Good quality work but took longer than expected.",
-      date: "2023-09-15T11:20:00Z",
-      images: [
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7"
-      ]
-    }
-  ],
-   userNotifications: [
-    {
-      id: "notif_001",
-      type: "job_update",
-      title: "Job Accepted",
-      message: "Kofi Plumbing has accepted your job request",
-      date: "2023-10-21T09:15:00Z",
-      read: true
-    }
-  ]
-};
-
-
-
-
-// Artisan Profile yeah
-
-// data/artisanProfile.js
-// export const artisanProfile = {
-//   id: "art_789",
-//   name: "Kofi Mensah",
-//   email: "kofi@example.com",
-//   profilePic: "/profiles/artisan1.jpg",
-//   role: "artisan",
-//   businessName: "Adinkra Crafts",
-//   craft: "Wood Carving",
-//   description: "Professional wood carver with 10 years of experience. Specializing in traditional Adinkra symbols and custom designs.",
-//   rating: 4.7,
-//   reviewCount: 42,
-//   hourlyRate: 25,
-//   specialties: ["Traditional Carvings", "Furniture", "Sculptures"],
-//   location: "Kumasi, Ashanti Region",
-//   experience: "10 years",
-//   isVerified: true,
-//   whatsapp: "+233201234567",
-//   phone: "+233201234567",
-//   portfolio: [
-//     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
-//     "https://images.unsplash.com/photo-1600566752355-35792bedcfea"
-//   ],
-//   joinedDate: "2023-04-10T09:20:00Z",
-//   lastLogin: "2023-07-19T16:30:00Z",
-//   status: "active",
-//   verificationStatus: "verified",
-//   stats: {
-//     completedJobs: 42,
-//     pendingJobs: 3,
-//     declinedJobs: 2,
-//     cancellationRate: 4.7
-//   },
-//   jobs: [
-//     {
-//       id: "job-101",
-//       title: "Kitchen Plumbing Repair",
-//       description: "Client needs help with a leaking kitchen sink pipe...",
-//       budget: "GHS 300",
-//       scheduledAt: "2023-11-10T09:00:00Z",
-//       createdAt: "2023-11-05T14:20:00Z",
-//       location: "Accra, Osu",
-//       status: "pending",
-//       images: [
-//         "https://images.unsplash.com/photo-1600566752227-82f1f1a71d1f"
-//       ],
-//       user: {
-//         id: "user_501",
-//         name: "Ama Serwaa",
-//         phone: "+233 24 765 4321",
-//         email: "ama.serwaa@example.com",
-//         location: "Accra, Osu"
-//       }
-//     },
-//     {
-//       id: "job-102",
-//       title: "Custom Wooden Stool",
-//       description: "Need a custom stool with Adinkra symbols...",
-//       budget: "GHS 450",
-//       scheduledAt: "2023-11-15T10:00:00Z",
-//       createdAt: "2023-11-08T11:30:00Z",
-//       location: "Kumasi, Ashanti Region",
-//       status: "accepted",
-//       images: [],
-//       user: {
-//         id: "user_205",
-//         name: "Kwabena Osei",
-//         phone: "+233 27 123 4567",
-//         email: "kwabena.osei@example.com",
-//         location: "Kumasi, Ashanti Region"
-//       }
-//     }
-//   ],
-//   reviews: [
-//     {
-//       id: "rev_001",
-//       jobId: "job-1",
-//       userId: "user_123",
-//       userName: "Kwame Asare",
-//       rating: 4,
-//       comment: "Excellent craftsmanship! The wood carving was exactly as described and delivered on time.",
-//       date: "2023-07-12T14:30:00Z",
-//       userProfilePic: "/profiles/user1.jpg"
-//     },
-//     {
-//       id: "rev_002",
-//       jobId: "job-2",
-//       userId: "user_456",
-//       userName: "Esi Coleman",
-//       rating: 5,
-//       comment: "Absolutely beautiful work! Will definitely hire again.",
-//       date: "2023-08-05T10:15:00Z",
-//       userProfilePic: "/profiles/user2.jpg"
-//     }
-//   ],
-  
-//   notifications: [
-//     {
-//       id: "notif_101",
-//       type: "new_job",
-//       title: "New Job Request",
-//       message: "You have a new job request for Kitchen Plumbing Repair",
-//       date: "2023-11-05T14:25:00Z",
-//         }
-//   ],
-  
-  
-// };
-
-export const artisanJobsSample = artisanProfile.jobs;
-export const artisanReviewsSample = artisanProfile.reviews;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//reviews on admin page
 export const AdminReview = [
   {
     id: "rev_003",
@@ -824,10 +665,11 @@ export const AdminReview = [
   },
 ];
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//User Review for artisans
 export const UserReviews = [
   {
     id: "rev_006",
@@ -903,9 +745,11 @@ export const UserReviews = [
   },
 ];
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Artisan Review Left by Users
 export const ArtisanReviews = [
   {
     id: "rev_014",
@@ -980,3 +824,4 @@ export const ArtisanReviews = [
     },
   },
 ];
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

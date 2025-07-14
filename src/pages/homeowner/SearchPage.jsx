@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ArtisanCard from '../../components/ui/ArtisanCard';
-import artisans from '../data/artisans';
+import { artisans } from '../data/dummyData';
 
 const SearchPage = () => {
   const location = useLocation();

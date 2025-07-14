@@ -2,7 +2,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
+
 
 // Layouts
 import Layout from "./components/layout/Layout";
@@ -58,9 +58,10 @@ import ArtisanJobDetailPage from "./pages/artisan/ArtisanJobDetailPage";
 import ArtisanJobsPage from "./pages/artisan/ArtisanJobsPage";
 import LeaveReviewPage from "./pages/artisan/LeaveReviewPage";
 
+
 function App() {
   return (
-    <AuthProvider>
+   
       <Router>
         <Routes>
           {/* Homeowner Routes */}
@@ -83,7 +84,7 @@ function App() {
             <Route path="profile/edit" element={<ProfileEditPage />} />
             <Route path="verification" element={<ArtisanVerificationPage />} />
             <Route
-              path="verification/status"
+              path="verify/status"
               element={<ArtisanVerificationStatusPage />}
             />
           </Route>
@@ -96,7 +97,6 @@ function App() {
             <Route path="my-jobs" element={<UserJobsPage />} />
             <Route path="my-jobs/:jobId" element={<UserJobDetailPage />} />
             <Route path="my-jobs/:jobId/edit" element={<EditJobRequestPage />} />
-
             <Route path="my-jobs/review/:artisanId" element={<ReviewForm />} />
             <Route path="my-jobs/post-job" element={<PostJobPage />} />
             <Route path="my-jobs/:id/review" element={<LeaveReviewPage />} />
@@ -131,7 +131,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </AuthProvider>
+    
   );
 }
 

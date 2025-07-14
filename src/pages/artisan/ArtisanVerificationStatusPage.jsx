@@ -1,36 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { artisanVerificationStatus } from "../data/dummyData";
 
 // Mock data matching backend structure
-const mockVerificationData = {
-  id: "ver_123456789",
-  status: "rejected", // "approved", "rejected"
-  submittedAt: "2023-07-15T10:30:00.000Z",
-  reviewedAt: null,
-  documents: [
-    { 
-      type: "id_front", 
-      url: "/uploads/id_front.jpg",
-      verified: false
-    },
-    { 
-      type: "id_back", 
-      url: "/uploads/id_back.jpg",
-      verified: false
-    },
-    { 
-      type: "address_proof", 
-      url: "/uploads/address_proof.pdf",
-      verified: false
-    },
-    { 
-      type: "business_reg", 
-      url: "/uploads/business_reg.pdf",
-      verified: false
-    }
-  ],
-  rejectionReason: "We cant Verify you now"
-};
+const mockVerificationData = artisanVerificationStatus
 
 function ArtisanVerificationStatusPage() {
   const [verificationData, setVerificationData] = useState(null);
@@ -68,7 +41,7 @@ function ArtisanVerificationStatusPage() {
     },
     approved: {
       title: "Verified Successfully!",
-      description: "Your account is now fully verified. You can access all features.",
+      description: "Your account is now fully verified. Users Can now verify your authenticity.",
       icon: "✅",
       color: "bg-green-100 text-green-800",
       action: {
@@ -81,10 +54,7 @@ function ArtisanVerificationStatusPage() {
       description: "We found issues with your submission. Please review the reason below.",
       icon: "❌",
       color: "bg-red-100 text-red-800",
-      // action: {
-      //   text: "Resubmit Documents",
-      //   handler: () => navigate("/artisan/verification")
-      // }
+    
     }
   };
 

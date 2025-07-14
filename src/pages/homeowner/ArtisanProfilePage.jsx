@@ -9,7 +9,7 @@ const ArtisanProfilePage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [saved, setSaved] = useState(false);
+ 
   
   const {
     register,
@@ -19,7 +19,7 @@ const ArtisanProfilePage = () => {
   } = useForm();
 
 
-  
+
   // Sample data - in a real app this would come from an API
   const artisan = publicArtisanProfile
 
@@ -123,13 +123,7 @@ const ArtisanProfilePage = () => {
                 >
                   <i className="fas fa-phone mr-1 md:mr-2"></i> Call
                 </a>
-                <button 
-                  onClick={() => setSaved(!saved)}
-                  className={`${saved ? 'bg-blue-100 text-blue-600' : 'bg-white text-blue-600'} px-3 md:px-5 py-1 md:py-2 rounded-lg flex items-center text-sm md:text-base border border-blue-200`}
-                >
-                  <i className={`${saved ? 'fas' : 'far'} fa-bookmark mr-1 md:mr-2`}></i> 
-                  {saved ? 'Saved' : 'Save'}
-                </button>
+                
               </div>
             </div>
           </div>
@@ -385,17 +379,7 @@ const ArtisanProfilePage = () => {
                         </div>
                         
                         <div className="pl-0 sm:pl-11 md:pl-13">
-                          <p className="text-gray-700 mt-1 md:mt-2 text-sm md:text-base">{review.comment}</p>
-                          
-                          {/* Review Actions */}
-                          <div className="flex items-center mt-2 md:mt-3 text-xs md:text-sm">
-                            <button className="text-blue-600 hover:text-blue-800 mr-3 md:mr-4 flex items-center">
-                              <i className="far fa-thumbs-up mr-1"></i> Helpful
-                            </button>
-                            <button className="text-gray-600 hover:text-gray-800 flex items-center">
-                              <i className="far fa-comment mr-1"></i> Reply
-                            </button>
-                          </div>
+                          <p className="text-gray-700 mt-1 md:mt-2 text-sm md:text-base">{review.comment}</p>                       
                         </div>
                       </div>
                     );

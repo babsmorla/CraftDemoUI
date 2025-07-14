@@ -1,7 +1,7 @@
 // AdminVerificationPage.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { verificationRequests } from "../data/dummyData"
+import { artisanVerificationRequest } from "../data/dummyData";
 
 function AdminVerificationPage() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function AdminVerificationPage() {
   useEffect(() => {
     // Simulate API call
     setTimeout(() => {
-      setRequests(verificationRequests);
+      setRequests(artisanVerificationRequest);
       setLoading(false);
     }, 800);
   }, []);

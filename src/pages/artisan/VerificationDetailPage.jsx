@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
       <div className="max-w-2xl mx-auto p-8 text-center">
         <p className="text-gray-500">No verification request selected.</p>
         <button
-          onClick={() => navigate("/admin/verify")}
+          onClick={() => navigate("/admin/verification")}
           className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
         >
           Back to Requests
@@ -67,7 +67,7 @@ import { useForm } from "react-hook-form";
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <button
-        onClick={() => navigate("/admin/verify")}
+        onClick={() => navigate("/admin/verification")}
         className="flex items-center text-indigo-600 hover:text-indigo-800 mb-6"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">

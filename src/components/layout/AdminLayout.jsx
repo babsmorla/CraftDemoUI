@@ -1,92 +1,135 @@
 // AdminLayout.jsx
 import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Star,
+  Users,
+  CheckCircle,
+  BarChart2,
+  Settings,
+  ArrowLeft,
+  LogOut,
+  Menu,
+} from "lucide-react";
 
 function AdminLayout() {
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const menuItems = [
-    { name: "Dashboard", path: "/admin", icon: "📊" },
-    { name: "Review Management", path: "/admin/reviews", icon: "⭐" },
-    { name: "User Management", path: "/admin/users", icon: "👥" },
-    { name: "Verifications", path: "/admin/verification", icon: "✅" },
-    { name: "Reports", path: "/admin/reports", icon: "📈" },
-    { name: "Settings", path: "/admin/settings", icon: "⚙️" },
+    { name: "Dash", path: "/admin", icon: <LayoutDashboard size={20} /> },
+    { name: "Reviews", path: "/admin/reviews", icon: <Star size={20} /> },
+    { name: "Users", path: "/admin/users", icon: <Users size={20} /> },
+    { name: "Verify", path: "/admin/verification", icon: <CheckCircle size={20} /> },
+    { name: "Reports", path: "/admin/reports", icon: <BarChart2 size={20} /> },
+    { name: "Settings", path: "/admin/settings", icon: <Settings size={20} /> },
   ];
 
+  const handleLogout = () => {
+    // clear auth/token if needed
+    navigate("/login");
+  };
+
+  const isMobile = window.innerWidth < 768;
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 font-sans">
       {/* Sidebar */}
-      <div 
+      <div
         className={`${
-          sidebarOpen ? "w-64" : "w-20"
-        } bg-indigo-800 text-white transition-all duration-300 flex flex-col`}
+          sidebarOpen || !isMobile ? "w-48" : "w-16"
+        } bg-white border-r border-gray-200 shadow-sm flex flex-col transition-all duration-300 fixed md:static z-40 h-full`}
       >
-        <div className="p-4 flex items-center justify-between">
-          {sidebarOpen && (
-            <h1 className="text-xl font-bold">CraftConnect Admin</h1>
+        {/* Logo & Toggle */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          {(sidebarOpen || !isMobile) && (
+            <span className="text-base font-semibold text-gray-800">Admin</span>
           )}
-          <button 
+          <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-white p-2 rounded hover:bg-indigo-700"
+            className="p-2 rounded hover:bg-gray-100 text-gray-600 md:hidden"
           >
-            {sidebarOpen ? "«" : "»"}
+            <Menu size={20} />
           </button>
         </div>
-        
-        <nav className="flex-1 mt-6">
-          <ul>
-            {menuItems.map((item) => (
-              <li key={item.name} className="mb-1">
-                <button
-                  onClick={() => navigate(item.path)}
-                  className={`w-full text-left flex items-center px-4 py-3 hover:bg-indigo-700 ${
-                    location.pathname === item.path ? "bg-indigo-700" : ""
-                  }`}
-                >
-                  <span className="text-xl mr-3">{item.icon}</span>
-                  {sidebarOpen && <span>{item.name}</span>}
-                </button>
-              </li>
-            ))}
-          </ul>
+
+        {/* Navigation */}
+        <nav className="flex-1 px-1 py-4 space-y-1">
+          {menuItems.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => {
+                navigate(item.path);
+                if (isMobile) setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center justify-center md:justify-start p-3 rounded-lg transition-all ${
+                location.pathname === item.path
+                  ? "bg-indigo-50 text-indigo-600 font-semibold"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              {item.icon}
+              {(sidebarOpen || !isMobile) && (
+                <span className="ml-2 text-sm">{item.name}</span>
+              )}
+            </button>
+          ))}
         </nav>
-        
-        <div className="p-4 border-t border-indigo-700">
-          <button 
-            onClick={() => navigate("/")}
-            className="flex items-center w-full text-left"
+
+        {/* Bottom Actions */}
+        <div className="p-2 border-t border-gray-200 flex flex-col gap-2">
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-center md:justify-start w-full p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-all"
           >
-            <span className="text-xl mr-3">←</span>
-            {sidebarOpen && <span>Back to Main Site</span>}
+            <LogOut size={20} />
+            {(sidebarOpen || !isMobile) && (
+              <span className="ml-2 text-sm">Logout</span>
+            )}
+          </button>
+
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center justify-center md:justify-start w-full p-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-100 rounded transition-all"
+          >
+            <ArrowLeft size={20} />
+            {(sidebarOpen || !isMobile) && (
+              <span className="ml-2 text-sm">Back</span>
+            )}
           </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <header className="bg-white shadow-sm">
-          <div className="flex justify-between items-center px-6 py-4">
-            <h2 className="text-lg font-semibold text-gray-800">Admin Dashboard</h2>
-            <div className="flex items-center">
-              <div className="relative mr-4">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="px-4 py-2 border border-gray-300 rounded-lg"
-                />
-              </div>
-              <div className="flex items-center">
-                <div className="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10" />
-                <span className="ml-3 text-gray-700 hidden md:inline">Admin User</span>
-              </div>
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Bar */}
+        <header className="bg-white border-b border-gray-200 shadow-sm flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="md:hidden p-2 rounded hover:bg-gray-100 text-gray-600"
+            >
+              <Menu size={20} />
+            </button>
+            <h2 className="text-lg font-semibold text-gray-800 capitalize">
+              {location.pathname.split("/").pop() || "Dashboard"}
+            </h2>
+          </div>
+          <div className="flex items-center gap-2 pr-2">
+            <div className="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center text-gray-600">
+              A
             </div>
+            <span className="text-gray-700 hidden md:inline">Admin</span>
           </div>
         </header>
-        
-        <main className="p-6">
-          <Outlet />
+
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
