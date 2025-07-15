@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard,
-  Briefcase,
   User,
+  Briefcase,
+  Star,
   ArrowLeft,
   LogOut,
   Menu,
@@ -15,9 +15,17 @@ function HomeownerDashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navItems = [
-    { name: "Dashboard", path: "/homeowner", icon: <LayoutDashboard size={20} /> },
-    { name: "My Jobs", path: "/homeowner/my-jobs", icon: <Briefcase size={20} /> },
-    { name: "Profile", path: "/homeowner/profile", icon: <User size={20} /> },
+    {
+      name: "Profile/Stats",
+      path: "/homeowner/user-profile",
+      icon: <User size={20} />,
+    },
+    {
+      name: "My Jobs",
+      path: "/homeowner/my-jobs",
+      icon: <Briefcase size={20} />,
+    },
+    { name: "My Reviews", path: "/homeowner/user-reviews", icon: <Star size={20} /> },
   ];
 
   const handleLogout = () => {
@@ -37,7 +45,9 @@ function HomeownerDashboardLayout() {
         {/* Logo & Toggle */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           {(sidebarOpen || !isMobile) && (
-            <span className="text-base font-semibold text-gray-800">Homeowner</span>
+            <span className="text-base font-semibold text-gray-800">
+              Homeowner
+            </span>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -120,11 +130,11 @@ function HomeownerDashboardLayout() {
         </header>
 
         {/* Content */}
-      <main className="flex-1 ml-9 overflow-y-auto p-4 md:p-6 bg-gray-50">
-  <div className="max-w-7xl mx-auto">
-    <Outlet />
-  </div>
-</main>
+        <main className="flex-1 ml-10 overflow-y-auto p-4 md:p-6 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <Outlet />
+          </div>
+        </main>
       </div>
     </div>
   );

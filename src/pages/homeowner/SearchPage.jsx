@@ -1,187 +1,226 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import ArtisanCard from '../../components/ui/ArtisanCard';
-import { artisans } from '../data/dummyData';
+import ArtisansCard from '../../components/ui/ArtisansCard';
+import { publicArtisanProfiles as artisans } from '../data/dummyData';
+import { MapPin, Search, Star } from 'lucide-react';
+
+const LOCATIONS = [
+  "Greater Accra",
+  "Ashanti Region",
+  "Western Region",
+  "Central Region",
+  "Volta Region",
+];
+
+const CRAFTS = [
+  "Plumber",
+  "Electrician",
+  "Carpenter",
+  "Painter",
+  "Tailor",
+  "Mason",
+  "Wood Carver",
+];
+
+const RATINGS = [5, 4, 3];
 
 const SearchPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+
   const [searchTerm, setSearchTerm] = useState(queryParams.get('q') || '');
   const [locationFilter, setLocationFilter] = useState(queryParams.get('location') || '');
+  const [craftFilter, setCraftFilter] = useState('');
+  const [selectedRatings, setSelectedRatings] = useState([]);
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [filteredArtisans, setFilteredArtisans] = useState([]);
-  
-  useEffect(() => {
-    // Filter artisans based on search criteria
-    const results = artisans.filter(artisan => {
-      const matchesSearch = artisan.businessName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                           artisan.specialties.some(s => s.toLowerCase().includes(searchTerm.toLowerCase()));
-      const matchesLocation = locationFilter ? artisan.location.includes(locationFilter) : true;
-      return matchesSearch && matchesLocation;
-    });
-    
-    setFilteredArtisans(results);
-  }, [searchTerm, locationFilter]);
-  
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-  
-  const handleLocationChange = (e) => {
-    setLocationFilter(e.target.value);
+
+  const handleRatingToggle = (rating) => {
+    setSelectedRatings(prev =>
+      prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
+    );
   };
 
+  const handleApplyFilters = () => {
+    const lowerSearch = searchTerm.trim().toLowerCase();
+
+    const results = artisans.filter(artisan => {
+      const matchesSearch =
+        artisan.businessName.toLowerCase().includes(lowerSearch) ||
+        artisan.craft?.toLowerCase().includes(lowerSearch) ||
+        artisan.specialties?.some(s => s.toLowerCase().includes(lowerSearch));
+
+      const matchesLocation = locationFilter
+        ? artisan.location?.toLowerCase().includes(locationFilter.toLowerCase())
+        : true;
+
+      const matchesCraft = craftFilter
+        ? artisan.craft?.toLowerCase() === craftFilter.toLowerCase()
+        : true;
+
+      const matchesVerified = verifiedOnly
+        ? artisan.verificationStatus === "verified"
+        : true;
+
+      const matchesRating = selectedRatings.length > 0
+        ? selectedRatings.some(rating => Math.floor(artisan.rating) >= rating)
+        : true;
+
+      return matchesSearch && matchesLocation && matchesCraft && matchesVerified && matchesRating;
+    });
+
+    setFilteredArtisans(results);
+  };
+
+  const handleResetFilters = () => {
+    setSearchTerm('');
+    setLocationFilter('');
+    setCraftFilter('');
+    setSelectedRatings([]);
+    setVerifiedOnly(false);
+    setFilteredArtisans(artisans);
+  };
+
+  useEffect(() => {
+    setFilteredArtisans(artisans);
+  }, []);
+
   return (
-    <div className="container mx-auto px-6 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Find Skilled Artisans</h1>
-        <p className="text-gray-600">Search for trusted professionals in your area</p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Find Skilled Artisans</h1>
+        <p className="text-gray-600 max-w-lg">Search for trusted professionals in your area</p>
       </div>
-      
+
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Filters Sidebar */}
-        <div className="lg:w-1/4">
-          <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
-            <h3 className="text-lg font-semibold mb-4">Filters</h3>
-            
-            <div className="mb-6">
-              <label className="block text-gray-700 mb-2">Location</label>
-              <select 
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        {/* Sidebar Filters */}
+        <aside className="lg:w-1/4">
+          <div className="bg-white rounded-xl border border-gray-200 p-5 sm:p-6 sticky top-24 space-y-6">
+            <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
+
+            {/* Location Filter */}
+            <div>
+              <label className="block text-gray-700 mb-1 font-medium">Location</label>
+              <select
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 value={locationFilter}
-                onChange={handleLocationChange}
+                onChange={(e) => setLocationFilter(e.target.value)}
               >
                 <option value="">All of Ghana</option>
-                <option value="Greater Accra">Greater Accra</option>
-                <option value="Ashanti Region">Ashanti Region</option>
-                <option value="Western Region">Western Region</option>
-                <option value="Central Region">Central Region</option>
-                <option value="Volta Region">Volta Region</option>
+                {LOCATIONS.map(loc => (
+                  <option key={loc} value={loc}>{loc}</option>
+                ))}
               </select>
             </div>
-            
-            <div className="mb-6">
-              <label className="block text-gray-700 mb-2">Service Category</label>
-              <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>All Categories</option>
-                <option>Plumbing</option>
-                <option>Electrical</option>
-                <option>Carpentry</option>
-                <option>Painting</option>
-                <option>Tailoring</option>
-                <option>Masonry</option>
+
+            {/* Craft Filter */}
+            <div>
+              <label className="block text-gray-700 mb-1 font-medium">Craft</label>
+              <select
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+                value={craftFilter}
+                onChange={(e) => setCraftFilter(e.target.value)}
+              >
+                <option value="">All Crafts</option>
+                {CRAFTS.map(craft => (
+                  <option key={craft} value={craft}>{craft}</option>
+                ))}
               </select>
             </div>
-            
-            <div className="mb-6">
-              <label className="block text-gray-700 mb-2">Rating</label>
+
+            {/* Rating Filter */}
+            <div>
+              <label className="block text-gray-700 mb-1 font-medium">Rating</label>
               <div className="space-y-2">
-                <div className="flex items-center">
-                  <input type="checkbox" id="rating-5" className="mr-2" />
-                  <label htmlFor="rating-5" className="text-gray-700">
-                    <span className="text-amber-400">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                    </span>
+                {RATINGS.map(rating => (
+                  <label key={rating} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedRatings.includes(rating)}
+                      onChange={() => handleRatingToggle(rating)}
+                      className="accent-indigo-600"
+                    />
+                    <div className="flex items-center space-x-0.5 text-amber-400">
+                      {[...Array(rating)].map((_, idx) => (
+                        <Star key={idx} size={16} fill="currentColor" />
+                      ))}
+                      {[...Array(5 - rating)].map((_, idx) => (
+                        <Star key={idx} size={16} className="text-gray-300" />
+                      ))}
+                      <span className="text-gray-700 text-sm ml-1">{rating}+</span>
+                    </div>
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input type="checkbox" id="rating-4" className="mr-2" defaultChecked />
-                  <label htmlFor="rating-4" className="text-gray-700">
-                    <span className="text-amber-400">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="far fa-star"></i> 4+
-                    </span>
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input type="checkbox" id="rating-3" className="mr-2" />
-                  <label htmlFor="rating-3" className="text-gray-700">
-                    <span className="text-amber-400">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="far fa-star"></i>
-                      <i className="far fa-star"></i> 3+
-                    </span>
-                  </label>
-                </div>
+                ))}
               </div>
             </div>
-            
-            <div className="mb-6">
-              <label className="block text-gray-700 mb-2">Verified Only</label>
-              <div className="flex items-center">
-                <input type="checkbox" id="verified" className="mr-2" defaultChecked />
-                <label htmlFor="verified" className="text-gray-700">Show verified artisans only</label>
-              </div>
+
+            {/* Verified Only */}
+            <div>
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={verifiedOnly}
+                  onChange={() => setVerifiedOnly(!verifiedOnly)}
+                  className="accent-indigo-600"
+                />
+                <span className="text-gray-700 font-medium">Verified Only</span>
+              </label>
             </div>
-            
-            <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Apply Filters</button>
-            <button className="w-full mt-2 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300">Reset Filters</button>
+
+            {/* Filter Buttons */}
+            <div className="space-y-2 pt-2">
+              <button
+                onClick={handleApplyFilters}
+                className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
+              >
+                Apply Filters
+              </button>
+              <button
+                onClick={handleResetFilters}
+                className="w-full bg-gray-100 text-gray-700 py-2 rounded-md hover:bg-gray-200 transition"
+              >
+                Reset Filters
+              </button>
+            </div>
           </div>
-        </div>
-        
-        {/* Results */}
-        <div className="lg:w-3/4">
+        </aside>
+
+        {/* Results Section */}
+        <main className="lg:w-3/4 space-y-6">
           {/* Search Bar */}
-          <div className="bg-white rounded-lg shadow-md p-4 mb-6 flex">
-            <input 
-              type="text" 
-              placeholder="Search for plumbers, electricians, tailors..." 
-              className="flex-grow px-4 py-2 text-gray-800 focus:outline-none rounded-l-lg"
+          <div className="flex bg-white rounded-md border border-gray-200 overflow-hidden shadow-sm">
+            <input
+              type="text"
+              placeholder="Search for artisans, crafts, or specialties..."
+              className="flex-grow px-4 py-2 text-gray-800 focus:outline-none"
               value={searchTerm}
-              onChange={handleSearchChange}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-r-lg hover:bg-blue-700 font-medium">
-              <i className="fas fa-search"></i>
+            <button
+              onClick={handleApplyFilters}
+              className="bg-indigo-600 px-4 flex items-center justify-center text-white hover:bg-indigo-700 transition"
+            >
+              <Search size={20} />
             </button>
           </div>
+
           
-          {/* Map View */}
-          <div className="map-container mb-8">
-            <div className="map-placeholder">
-              <i className="fas fa-map-marked-alt text-4xl mb-4 text-gray-400"></i>
-              <h3 className="text-xl font-semibold mb-2">Artisan Locations Map</h3>
-              <p className="text-center px-4">Interactive map showing verified artisans in your selected area</p>
-            </div>
-          </div>
-          
+
           {/* Artisan Results */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {filteredArtisans.length > 0 ? (
               filteredArtisans.map(artisan => (
-                <ArtisanCard key={artisan.id} artisan={artisan} />
+                <ArtisansCard key={artisan.id} artisan={artisan} />
               ))
             ) : (
-              <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                <i className="fas fa-search text-4xl text-gray-400 mb-4"></i>
-                <h3 className="text-xl font-semibold mb-2">No artisans found</h3>
-                <p>Try adjusting your search filters</p>
+              <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-gray-200 p-8 text-center space-y-2">
+                <Search size={32} className="text-gray-400" />
+                <h3 className="text-lg font-semibold">No artisans found</h3>
+                <p className="text-gray-500 text-sm">Try adjusting your search filters.</p>
               </div>
             )}
-            
-            {/* Pagination */}
-            <div className="mt-10 flex justify-center">
-              <nav className="inline-flex rounded-md shadow">
-                <a href="#" className="py-2 px-4 border border-gray-300 bg-white text-blue-600 rounded-l-lg">
-                  <i className="fas fa-arrow-left"></i>
-                </a>
-                <a href="#" className="py-2 px-4 border-t border-b border-gray-300 bg-white text-blue-600 font-medium">1</a>
-                <a href="#" className="py-2 px-4 border-t border-b border-gray-300 bg-blue-600 text-white font-medium">2</a>
-                <a href="#" className="py-2 px-4 border-t border-b border-gray-300 bg-white text-blue-600 font-medium">3</a>
-                <a href="#" className="py-2 px-4 border border-gray-300 bg-white text-blue-600 rounded-r-lg">
-                  <i className="fas fa-arrow-right"></i>
-                </a>
-              </nav>
-            </div>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

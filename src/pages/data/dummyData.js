@@ -27,7 +27,6 @@ export const users = [
     phone: "0209876543",
   },
 ];
-  
 
 export const artisans = [
   {
@@ -38,7 +37,7 @@ export const artisans = [
     profilePic: "/profiles/artisan1.jpg",
     role: "artisan",
     businessName: "Adinkra Crafts",
-    craft: "Wood Carving",
+    craft: "Plumber",
     description:
       "Professional wood carver with 10 years of experience. Specializing in traditional Adinkra symbols and custom designs.", // Added
     rating: 4.7,
@@ -71,7 +70,7 @@ export const artisans = [
     profilePic: "/profiles/artisan2.jpg",
     role: "artisan",
     businessName: "Kente Weavers",
-    craft: "Textile Arts",
+    craft: "Electrician",
     description:
       "Master weaver preserving traditional Kente techniques with 8 years of experience. Creates custom patterns for special occasions.", // Added
     rating: 4.9,
@@ -91,7 +90,7 @@ export const artisans = [
     joinedDate: "2023-03-22T14:10:00Z",
     lastLogin: "2023-07-21T11:20:00Z",
     status: "active",
-    verificationStatus: "verified",
+    verificationStatus: "pending",
     completedJobs: 67,
     jobs: ["job-2"],
     reviews: ["rev_002", "rev_003"],
@@ -143,98 +142,213 @@ export const reviews = [
   },
 ];
 
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Artsans's Profile In Public
-export const publicArtisanProfile = {
-    id: "art_001",
-    name: "Kwame Asare",
-    businessName: "Asare Woodworks",
-    profilePic: "/profiles/artisan1.jpg",
-    rating: 4.7,
-    reviewCount: 28,
+export const publicArtisanProfiles = [
+  {
+    id: "art_1001",
+    name: "Yaw Appiah",
+    email: "yaw.appiah@example.com",
+    profilePic: "/profiles/plumber1.jpg",
+    role: "artisan",
+    businessName: "Appiah Plumbing Services",
+    craft: "Plumber",
+    description:
+      "Licensed plumber specializing in leak repairs, bathroom fittings, and residential plumbing installations.",
+    rating: 4.9,
+    reviewCount: 40,
+    hourlyRate: 35,
+    specialties: ["Leak Repairs", "Pipe Installations", "Bathroom Fittings"],
+    location: "Takoradi, Western Region",
+    experience: "12 years",
+    whatsapp: "+233208765432",
+    phone: "+233208765432",
+    accountStatus: "Active",
     verificationStatus: "verified",
-    location: "Accra, Ghana",
-    experience: "10 years",
-    hourlyRate: 50,
-    whatsapp: "+233123456789",
-    phone: "+233123456789",
-    description: "Master carpenter with over a decade of experience creating custom furniture and woodwork. Specializing in traditional Ghanaian designs with modern functionality. Committed to quality craftsmanship and customer satisfaction.",
-    specialties: ["Custom Furniture", "Cabinetry", "Wood Carving", "Home Decor"],
     portfolio: [
-      "/portfolio/woodwork1.jpg",
-      "/portfolio/woodwork2.jpg",
-      "/portfolio/woodwork3.jpg",
-      "/portfolio/woodwork4.jpg",
-      "/portfolio/woodwork5.jpg",
-      "/portfolio/woodwork6.jpg",
+      "https://images.unsplash.com/photo-1597092960613-210ae312f79e",
+      "https://images.unsplash.com/photo-1581579185169-1b42c1fca735",
     ],
-    services: [
-      {
-        service: "Custom Dining Table",
-        description: "Handcrafted dining table with your choice of wood and design",
-        price: "GHS 1,200 - 3,500",
-        estimatedTime: "2-4 weeks"
-      },
-      {
-        service: "Bookshelf Unit",
-        description: "Custom-sized bookshelf with optional carving details",
-        price: "GHS 800 - 2,000",
-        estimatedTime: "1-3 weeks"
-      },
-      {
-        service: "Bed Frame",
-        description: "Solid wood bed frame with storage options",
-        price: "GHS 1,500 - 4,000",
-        estimatedTime: "3-5 weeks"
-      },
-    ],
-    pricingNotes: "• Prices vary based on material choice and complexity\n• 30% deposit required to begin work\n• Delivery available for additional fee",
+    stats: {
+      completedJobs: 65,
+      pendingJobs: 3,
+      declinedJobs: 2,
+      cancellationRate: 1.8,
+    },
     reviews: [
       {
-        id: "rev_001",
-        jobId: "job-01",
+        id: "rev_1001",
+        jobId: "job-501",
         rating: 5,
-        comment: "Kwame built us a beautiful dining table that exceeded our expectations. The craftsmanship is exceptional!",
-        date: "2025-03-15T14:30:00Z",
+        comment:
+          "Fixed my leaking kitchen pipe efficiently, highly professional service.",
+        date: "2025-04-15T09:00:00Z",
         user: {
-          id: "user_001",
-          name: "Ama Mensah",
+          id: "user_2001",
+          name: "Akosua Danso",
           profilePic: "/profiles/user1.jpg",
         },
       },
+    ],
+    services: [
       {
-        id: "rev_002",
-        jobId: "job-05",
-        rating: 4,
-        comment: "Good quality bookshelves, delivered on time. Would recommend.",
-        date: "2025-02-28T09:15:00Z",
+        id: "svc_1001",
+        service: "Leak Repairs",
+        description:
+          "Quick and professional leak detection and repair for home and office plumbing.",
+        price: "GHS 200/hr",
+        estimatedTime: "Varies by issue",
+      },
+      {
+        id: "svc_1002",
+        service: "Bathroom Fittings",
+        description:
+          "Installation and maintenance of showers, sinks, and toilet systems.",
+        price: "GHS 300/hr",
+        estimatedTime: "Varies by project",
+      },
+    ],
+    pricingNotes: `Rates depend on project complexity.
+Material costs are separate.
+Free inspection available for larger jobs.`,
+  },
+  {
+    id: "art_1002",
+    name: "Kwame Boateng",
+    email: "kwame.boateng@example.com",
+    profilePic: "/profiles/carpenter1.jpg",
+    role: "artisan",
+    businessName: "Boateng Carpentry Works",
+    craft: "Carpenter",
+    description:
+      "Expert carpenter providing custom furniture, door installations, and wood repairs with attention to detail.",
+    rating: 4.7,
+    reviewCount: 33,
+    hourlyRate: 40,
+    specialties: ["Custom Furniture", "Door Installations", "Wood Repairs"],
+    location: "Accra, Greater Accra Region",
+    experience: "8 years",
+    whatsapp: "+233209876543",
+    phone: "+233209876543",
+    accountStatus: "Active",
+    verificationStatus: "verified",
+    portfolio: [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc",
+      "https://images.unsplash.com/photo-1598300052219-d7a93c9a326d",
+    ],
+    stats: {
+      completedJobs: 48,
+      pendingJobs: 2,
+      declinedJobs: 1,
+      cancellationRate: 2.5,
+    },
+    reviews: [
+      {
+        id: "rev_1002",
+        jobId: "job-502",
+        rating: 5,
+        comment:
+          "Built a beautiful custom bookshelf for my home, great craftsmanship.",
+        date: "2025-05-10T14:30:00Z",
         user: {
-          id: "user_002",
-          name: "Kofi Ansah",
+          id: "user_2002",
+          name: "Sarah Owusu",
           profilePic: "/profiles/user2.jpg",
         },
       },
+    ],
+    services: [
       {
-        id: "rev_003",
-        jobId: "job-08",
-        rating: 3,
-        comment: "The bed frame is sturdy but took longer than expected to complete.",
-        date: "2025-01-10T16:45:00Z",
+        id: "svc_1003",
+        service: "Custom Furniture",
+        description:
+          "Design and build custom furniture tailored to your space.",
+        price: "GHS 350/hr",
+        estimatedTime: "Project dependent",
+      },
+      {
+        id: "svc_1004",
+        service: "Door Installations",
+        description:
+          "Professional door fitting and repairs for homes and offices.",
+        price: "GHS 250/hr",
+        estimatedTime: "Varies by installation",
+      },
+    ],
+    pricingNotes: `Minimum service: 1 hour.
+Wood and hardware costs excluded from hourly rate.
+Quotes provided upon request.`,
+  },
+  {
+    id: "art_1003",
+    name: "Ama Serwaa",
+    email: "ama.serwaa@example.com",
+    profilePic: "/profiles/electrician1.jpg",
+    role: "artisan",
+    businessName: "Serwaa Electrical Services",
+    craft: "Electrician",
+    description:
+      "Certified electrician offering wiring, lighting installations, and electrical repairs for residential and commercial properties.",
+    rating: 4.8,
+    reviewCount: 29,
+    hourlyRate: 45,
+    specialties: ["Wiring", "Lighting Installations", "Electrical Repairs"],
+    location: "Kumasi, Ashanti Region",
+    experience: "9 years",
+    whatsapp: "+233201234567",
+    phone: "+233201234567",
+    accountStatus: "Active",
+    verificationStatus: "verified",
+    portfolio: [
+      "https://images.unsplash.com/photo-1581091870621-6c176c02cf0d",
+      "https://images.unsplash.com/photo-1567016532254-cbc21f60c480",
+    ],
+    stats: {
+      completedJobs: 54,
+      pendingJobs: 3,
+      declinedJobs: 0,
+      cancellationRate: 1.2,
+    },
+    reviews: [
+      {
+        id: "rev_1003",
+        jobId: "job-503",
+        rating: 5,
+        comment:
+          "Installed new lights in my shop quickly and safely, will Request Service again.",
+        date: "2025-06-02T11:15:00Z",
         user: {
-          id: "user_003",
-          name: "Esi Boateng",
-          profilePic: null,
+          id: "user_2003",
+          name: "Yaw Mensah",
+          profilePic: "/profiles/user3.jpg",
         },
       },
     ],
-  };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    services: [
+      {
+        id: "svc_1005",
+        service: "Wiring",
+        description:
+          "Full wiring services for new constructions and renovations.",
+        price: "GHS 300/hr",
+        estimatedTime: "Varies by property size",
+      },
+      {
+        id: "svc_1006",
+        service: "Lighting Installations",
+        description:
+          "Safe and neat lighting installations for homes and offices.",
+        price: "GHS 280/hr",
+        estimatedTime: "Varies by project",
+      },
+    ],
+    pricingNotes: `Project inspection is free.
+Pricing excludes fixtures and materials.
+All work is insured and guaranteed.`,
+  },
+];
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const userProfilee = {
@@ -251,13 +365,10 @@ export const userProfilee = {
     totalJobs: 5,
     completedJobs: 3,
     pendingJobs: 1,
-    cancelledJobs: 1
+    cancelledJobs: 1,
   },
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Artisan Profile in on Personal Dashboard
@@ -269,7 +380,8 @@ export const artisanProfile = {
   role: "artisan",
   businessName: "Adinkra Crafts",
   craft: "Wood Carving",
-  description: "Professional wood carver with 10 years of experience. Specializing in traditional Adinkra symbols and custom designs.",
+  description:
+    "Professional wood carver with 10 years of experience. Specializing in traditional Adinkra symbols and custom designs.",
   rating: 4.7,
   reviewCount: 42,
   hourlyRate: 25,
@@ -280,80 +392,78 @@ export const artisanProfile = {
   phone: "+233201234567",
   portfolio: [
     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
-    "https://images.unsplash.com/photo-1600566752355-35792bedcfea"
+    "https://images.unsplash.com/photo-1600566752355-35792bedcfea",
   ],
-  accountStatus: "active",// "Suspended" 
+  accountStatus: "active", // "Suspended"
   verificationStatus: "verified", //"Not Verified"
   stats: {
     completedJobs: 42,
     pendingJobs: 3,
     declinedJobs: 2,
-    cancellationRate: 4.7
+    cancellationRate: 4.7,
   },
   reviews: [
-      {
-        id: "rev_001",
-        jobId: "job-01",
-        rating: 5,
-        comment: "Kwame built us a beautiful dining table that exceeded our expectations. The craftsmanship is exceptional!",
-        date: "2025-03-15T14:30:00Z",
-        user: {
-          id: "user_001",
-          name: "Ama Mensah",
-          profilePic: "/profiles/user1.jpg",
-        },
+    {
+      id: "rev_001",
+      jobId: "job-01",
+      rating: 5,
+      comment:
+        "Kwame built us a beautiful dining table that exceeded our expectations. The craftsmanship is exceptional!",
+      date: "2025-03-15T14:30:00Z",
+      user: {
+        id: "user_001",
+        name: "Ama Mensah",
+        profilePic: "/profiles/user1.jpg",
       },
-      {
-        id: "rev_002",
-        jobId: "job-05",
-        rating: 4,
-        comment: "Good quality bookshelves, delivered on time. Would recommend.",
-        date: "2025-02-28T09:15:00Z",
-        user: {
-          id: "user_002",
-          name: "Kofi Ansah",
-          profilePic: "/profiles/user2.jpg",
-        },
+    },
+    {
+      id: "rev_002",
+      jobId: "job-05",
+      rating: 4,
+      comment: "Good quality bookshelves, delivered on time. Would recommend.",
+      date: "2025-02-28T09:15:00Z",
+      user: {
+        id: "user_002",
+        name: "Kofi Ansah",
+        profilePic: "/profiles/user2.jpg",
       },
-      {
-        id: "rev_003",
-        jobId: "job-08",
-        rating: 3,
-        comment: "The bed frame is sturdy but took longer than expected to complete.",
-        date: "2025-01-10T16:45:00Z",
-        user: {
-          id: "user_003",
-          name: "Esi Boateng",
-          profilePic: null,
-        },
+    },
+    {
+      id: "rev_003",
+      jobId: "job-08",
+      rating: 3,
+      comment:
+        "The bed frame is sturdy but took longer than expected to complete.",
+      date: "2025-01-10T16:45:00Z",
+      user: {
+        id: "user_003",
+        name: "Esi Boateng",
+        profilePic: null,
       },
-    ],
+    },
+  ],
   services: [
-  {
-    id: "svc_001",
-    service: "Wiring",
-    description: "Professional wiring service",
-    price: "GHS 250/hr",
-    estimatedTime: "Varies by project",
-  },
-  {
-    id: "svc_002",
-    service: "Installations",
-    description: "Professional installations service",
-    price: "GHS 300/hr",
-    estimatedTime: "Varies by project",
-  },
-],
-pricingNotes: `Prices are estimates and may vary based on project complexity.
+    {
+      id: "svc_001",
+      service: "Wiring",
+      description: "Professional wiring service",
+      price: "GHS 250/hr",
+      estimatedTime: "Varies by project",
+    },
+    {
+      id: "svc_002",
+      service: "Installations",
+      description: "Professional installations service",
+      price: "GHS 300/hr",
+      estimatedTime: "Varies by project",
+    },
+  ],
+  pricingNotes: `Prices are estimates and may vary based on project complexity.
 Minimum service charge: 1 hour.
 Materials not included in pricing.
 Free quotes available upon request.`,
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -420,9 +530,6 @@ export const artisanVerificationRequest = [
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //for a particular user
 export const artisanVerificationStatus = {
@@ -434,49 +541,51 @@ export const artisanVerificationStatus = {
   documents: [
     { type: "id_front", url: "/uploads/id_front.jpg", verified: true },
     { type: "id_back", url: "/uploads/id_back.jpg", verified: true },
-    { type: "address_proof", url: "/uploads/address_proof.pdf", verified: true },
-    { type: "business_reg", url: "/uploads/business_reg.pdf", verified: true }
-  ]
+    {
+      type: "address_proof",
+      url: "/uploads/address_proof.pdf",
+      verified: true,
+    },
+    { type: "business_reg", url: "/uploads/business_reg.pdf", verified: true },
+  ],
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// User Jobs and Artisan Jobs 
+// User Jobs and Artisan Jobs
 export const userJobs = [
   {
     id: "job-1",
     title: "Fix leaking kitchen sink",
-    description: "The kitchen sink has been leaking near the pipe joint for 2 days. Need urgent assistance. The leak is causing water damage to the cabinet below. Looking for a professional plumber with experience in pipe repairs.",
+    description:
+      "The kitchen sink has been leaking near the pipe joint for 2 days. Need urgent assistance. The leak is causing water damage to the cabinet below. Looking for a professional plumber with experience in pipe repairs.",
     budget: "GHS 250",
     scheduledAt: "2023-10-25T10:00:00Z",
     createdAt: "2023-10-20T08:30:00Z",
     location: "Accra, Spintex Road",
     userId: "user_123",
     artisanId: "art_789",
-    status: "pending",
-    declineReason: "",
+    status: "declined",
+    declineReason: "no",
     cancellationReason: "",
     images: [
       "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1621544402532-78c290378588?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1621544402532-78c290378588?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
     ],
     artisan: {
       businessName: "Kofi Plumbing Services",
       rating: 4.7,
       phone: "+233 24 123 4567",
       email: "kofi.plumbing@example.com",
-      completedJobs: 42
-    }
+      completedJobs: 42,
+    },
   },
   {
     id: "job-2",
     title: "Install air conditioning unit",
-    description: "Need a 2.5HP split AC installed in my bedroom. The wall mounting bracket needs to be installed and proper electrical wiring done. Includes refrigerant charging and testing.",
+    description:
+      "Need a 2.5HP split AC installed in my bedroom. The wall mounting bracket needs to be installed and proper electrical wiring done. Includes refrigerant charging and testing.",
     budget: "GHS 1,200",
     scheduledAt: "2023-11-05T09:00:00Z",
     createdAt: "2023-10-28T14:15:00Z",
@@ -487,20 +596,21 @@ export const userJobs = [
     declineReason: "I cant work at the moment",
     cancellationReason: "",
     images: [
-      "https://images.unsplash.com/photo-1585123388860-da6b0b0e67b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1585123388860-da6b0b0e67b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
     ],
     artisan: {
       businessName: "CoolBreeze AC Solutions",
       rating: 4.9,
       phone: "+233 55 987 6543",
       email: "coolbreeze.ac@example.com",
-      completedJobs: 128
-    }
+      completedJobs: 128,
+    },
   },
   {
     id: "job-3",
     title: "Repair broken ceiling fan",
-    description: "Living room ceiling fan stopped working suddenly. Makes humming noise but blades don't rotate. Needs motor inspection and possible replacement.",
+    description:
+      "Living room ceiling fan stopped working suddenly. Makes humming noise but blades don't rotate. Needs motor inspection and possible replacement.",
     budget: "GHS 350",
     scheduledAt: "2023-10-30T13:00:00Z",
     createdAt: "2023-10-25T11:20:00Z",
@@ -512,54 +622,52 @@ export const userJobs = [
     cancellationReason: "",
     images: [
       "https://images.unsplash.com/photo-1580261450046-d0a30080dc9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1567530078598-64f1a7a0a2a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1567530078598-64f1a7a0a2a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
     ],
     artisan: {
       businessName: "ElectroFix Electricals",
       rating: 4.5,
       phone: "+233 27 456 7890",
       email: "electrofix@example.com",
-      completedJobs: 87
-    }
-  }
+      completedJobs: 87,
+    },
+  },
 ];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//User Jobs and Artisan Jobs 
+//User Jobs and Artisan Jobs
 export const artisanJobs = [
-  
   {
     id: "job-101",
     title: "Kitchen Plumbing Repair",
-    description: "Client needs help with a leaking kitchen sink pipe. The leak is causing water damage to cabinets below. Requires pipe joint repair or replacement.",
+    description:
+      "Client needs help with a leaking kitchen sink pipe. The leak is causing water damage to cabinets below. Requires pipe joint repair or replacement.",
     budget: "GHS 300",
     scheduledAt: "2023-11-10T09:00:00Z",
     createdAt: "2023-11-05T14:20:00Z",
     location: "Accra, Osu",
     userId: "user_501",
     artisanId: "art_001",
-    status: "pending",
+    status: "accepted",
     declineReason: "",
     cancellationReason: "",
     images: [
-      "https://images.unsplash.com/photo-1600566752227-82f1f1a71d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1600566752227-82f1f1a71d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
     ],
     user: {
       name: "Ama Serwaa",
       phone: "+233 24 765 4321",
       email: "ama.serwaa@example.com",
-      location: "Accra, Osu"
-    }
+      location: "Accra, Osu",
+    },
   },
   {
     id: "job-102",
     title: "Bedroom AC Installation",
-    description: "Install new 2HP split AC unit in master bedroom. Requires wall mounting, electrical connection, and refrigerant charging.",
+    description:
+      "Install new 2HP split AC unit in master bedroom. Requires wall mounting, electrical connection, and refrigerant charging.",
     budget: "GHS 1,500",
     scheduledAt: "2023-11-15T10:30:00Z",
     createdAt: "2023-11-08T11:15:00Z",
@@ -570,19 +678,20 @@ export const artisanJobs = [
     declineReason: "Don't have the required AC model",
     cancellationReason: "",
     images: [
-      "https://images.unsplash.com/photo-1585123388860-da6b0b0e67b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1585123388860-da6b0b0e67b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
     ],
     user: {
       name: "Kwame Asante",
       phone: "+233 20 987 6543",
       email: "kwame.asante@example.com",
-      location: "Kumasi, Ahodwo"
-    }
+      location: "Kumasi, Ahodwo",
+    },
   },
   {
     id: "job-103",
     title: "Living Room Painting",
-    description: "Full repainting of living room (approx 40 sqm). Walls need to be prepped and painted with premium matte finish paint. Color change from white to light blue.",
+    description:
+      "Full repainting of living room (approx 40 sqm). Walls need to be prepped and painted with premium matte finish paint. Color change from white to light blue.",
     budget: "GHS 2,000",
     scheduledAt: "2023-11-20T08:00:00Z",
     createdAt: "2023-11-10T09:45:00Z",
@@ -593,20 +702,41 @@ export const artisanJobs = [
     declineReason: "",
     cancellationReason: "Found another painter with better rates",
     images: [
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
     ],
     user: {
       name: "Esi Mensah",
       phone: "+233 27 123 4567",
       email: "esi.mensah@example.com",
-      location: "Tema, Community 5"
-    }
-  }
+      location: "Tema, Community 5",
+    },
+  },
+  {
+    id: "job-103",
+    title: "Living Room Painting",
+    description:
+      "Full repainting of living room (approx 40 sqm). Walls need to be prepped and painted with premium matte finish paint. Color change from white to light blue.",
+    budget: "GHS 2,000",
+    scheduledAt: "2023-11-20T08:00:00Z",
+    createdAt: "2023-11-10T09:45:00Z",
+    location: "Tema, Community 5",
+    userId: "user_503",
+    artisanId: "art_001",
+    status: "accepted",
+    declineReason: "",
+    cancellationReason: "",
+    images: [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+    ],
+    user: {
+      name: "Esi Mensah",
+      phone: "+233 27 123 4567",
+      email: "esi.mensah@example.com",
+      location: "Tema, Community 5",
+    },
+  },
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -652,7 +782,7 @@ export const AdminReview = [
     rating: 1,
     comment: "Work was never completed and communication was poor.",
     date: "2024-04-05T11:20:00Z",
-     user: {
+    user: {
       id: "user_654",
       name: "Efua Mensah",
       profilePic: "/profiles/user2.jpg",
@@ -666,7 +796,6 @@ export const AdminReview = [
 ];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //User Review for artisans
@@ -747,7 +876,6 @@ export const UserReviews = [
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Artisan Review Left by Users
 export const ArtisanReviews = [
@@ -825,3 +953,39 @@ export const ArtisanReviews = [
   },
 ];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// src/data/dummyArtisanServices.js
+
+export const artisanServices = {
+  services: [
+    {
+      id: "svc_001",
+      service: "Furniture Assembly",
+      description: "Expert assembly of flat-pack and custom furniture with precision and care.",
+      price: "GHS 150/hr",
+      estimatedTime: "1-3 hours per project"
+    },
+    {
+      id: "svc_002",
+      service: "Wood Carving",
+      description: "Traditional Adinkra and custom carvings for decor and furniture enhancements.",
+      price: "GHS 250/hr",
+      estimatedTime: "Varies by design complexity"
+    },
+    {
+      id: "svc_003",
+      service: "Door & Window Installation",
+      description: "Professional installation of wooden doors and windows, including frame adjustments.",
+      price: "GHS 200/hr",
+      estimatedTime: "2-5 hours per installation"
+    }
+  ],
+  pricingNotes: `Prices are estimates and may vary based on project complexity.
+Minimum service charge is for 1 hour.
+Materials are not included in pricing.
+Free quotes are available upon request.`
+};
+
+export default artisanServices;

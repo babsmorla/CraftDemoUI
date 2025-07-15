@@ -190,7 +190,8 @@ export const artisanProfile = {
       userId: "user_456",
       userName: "Esi Coleman",
       rating: 5,
-      comment: "Absolutely beautiful work! Will definitely hire again.",
+      comment:
+        "Absolutely beautiful work! Will definitely Request Service again.",
       date: "2023-08-05T10:15:00Z",
       userProfilePic: "/profiles/user2.jpg",
     },
@@ -206,8 +207,6 @@ export const artisanProfile = {
     },
   ],
 };
-
-
 
 // For Easy Calling
 // Get All Jobs from users by An Artisan when logged in
@@ -265,7 +264,3 @@ artisanNotifications = [
   },
   // ... additional notification objects
 ];
-
-
-
-

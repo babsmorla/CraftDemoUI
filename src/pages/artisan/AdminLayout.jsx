@@ -22,7 +22,11 @@ function AdminLayout() {
     { name: "Dash", path: "/admin", icon: <LayoutDashboard size={20} /> },
     { name: "Reviews", path: "/admin/reviews", icon: <Star size={20} /> },
     { name: "Users", path: "/admin/users", icon: <Users size={20} /> },
-    { name: "Verify", path: "/admin/verification", icon: <CheckCircle size={20} /> },
+    {
+      name: "Verify",
+      path: "/admin/verification",
+      icon: <CheckCircle size={20} />,
+    },
     { name: "Reports", path: "/admin/reports", icon: <BarChart2 size={20} /> },
     { name: "Settings", path: "/admin/settings", icon: <Settings size={20} /> },
   ];
@@ -126,7 +130,7 @@ function AdminLayout() {
         </header>
 
         {/* Content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+        <main className="flex-1 ml-10 overflow-y-auto p-4 md:p-6 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

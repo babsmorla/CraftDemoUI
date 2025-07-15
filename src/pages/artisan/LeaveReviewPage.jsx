@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { jobs as userJobs } from '../data/dataold';
+import { userJobs } from '../data/dummyData';
 
 const LeaveReviewPage = () => {
   const { id } = useParams();

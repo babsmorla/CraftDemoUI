@@ -1,5 +1,6 @@
 import React from 'react';
-import JobRequestForm from '../../components/forms/JobRequestForm';
+import JobRequestForm from './JobRequestForm';
+
 
  function RequestJobPage() {
   const handleRequestSubmit = async (data) => {

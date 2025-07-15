@@ -1,81 +1,154 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const links = [
-    // Homeowner
-    { label: "Home", path: "/" },
-    { label: "Search", path: "/search" },
-    { label: "Contact", path: "/contact" },
-    { label: "Artisan Profile (View)", path: "/artisan/:id" }, // dynamic, but left for reference
+  const currentUser = "Umar";
 
-    // Artisan
-    { label: "Artisan Dashboard", path: "/artisan" },
-    { label: "Artisan Profile", path: "/artisan/profile" },
-    { label: "Profile Edit", path: "/artisan/profile/edit" },
-    { label: "Jobs", path: "/artisan/jobs" },
-    { label: "Services", path: "/artisan/services" },
-    { label: "Add Services", path: "/artisan/services/add" },
-    { label: "Edit Services", path: "/artisan/services/edit" },
-    { label: "Verification", path: "/artisan/verification" },
-    { label: "Verification Status", path: "/artisan/verification/status" },
-
-    // Review Pages
-    { label: "Leave Review", path: "/review/:artisanId" }, // dynamic
-    { label: "Review Confirmation", path: "/review-confirmation/:artisanId" }, // dynamic
-
-    // Homeowner Dashboard
-    { label: "Homeowner Dashboard", path: "/homeowner" },
-    { label: "My Jobs", path: "/homeowner/my-jobs" },
-    { label: "Job Detail", path: "/homeowner/my-jobs/:id" }, // dynamic
-    { label: "Edit Job Request", path: "/homeowner/my-jobs/:id/edit" }, // dynamic
-    { label: "Review Job", path: "/homeowner/my-jobs/:id/review" }, // dynamic
-    { label: "Request Job", path: "/homeowner/request" },
-
-    // Admin
-    { label: "Admin Dashboard", path: "/admin" },
-    { label: "Admin Verification", path: "/admin/verification" },
-    { label: "Verify Detail", path: "/admin/verify-detail" },
-    { label: "Admin Reviews", path: "/admin/reviews" },
-    { label: "Review Detail", path: "/admin/reviews/:reviewId" }, // dynamic
-    { label: "Admin Users", path: "/admin/users" },
-    { label: "User Detail", path: "/admin/users/:userId" }, // dynamic
-
-    // Auth
-    { label: "Login", path: "/login" },
-    { label: "Signup", path: "/signup" },
-    { label: "Forgot Password", path: "/forgot-password" },
-
-    // Legacy
-    { label: "AdminOld", path: "/adminold" },
-  ];
-
-  // Filter out dynamic params for navigation testing
-  const isDynamic = (path) => path.includes(":");
+  const handleLogout = () => navigate("/");
 
   return (
-    <div className="w-full bg-white shadow sticky top-0 z-50 overflow-x-auto">
-      <div className="flex space-x-2 px-4 py-2 whitespace-nowrap">
-        {links.map((link) => (
-          <button
-            key={link.label}
-            disabled={isDynamic(link.path)}
-            onClick={() => {
-              if (!isDynamic(link.path)) navigate(link.path);
-            }}
-            className={`px-3 py-1.5 text-sm font-medium rounded ${
-              isDynamic(link.path)
-                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                : "hover:bg-indigo-100 active:bg-indigo-200 text-gray-700"
-            } transition-colors`}
-          >
-            {link.label}
+    <header className="bg-white border-b border-neutral-200 sticky top-0 z-50">
+      {/* Mobile Navigation */}
+      <div className="md:hidden fixed w-full z-50 bg-white border-b border-neutral-200">
+        <div className="p-4 flex justify-between items-center">
+          <Link to="/" className="text-lg font-semibold text-neutral-800 flex items-center">
+            <i className="fas fa-hammer mr-2 text-blue-500"></i>CraftConnect
+          </Link>
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-neutral-600 focus:outline-none">
+            <i className="fas fa-bars text-2xl"></i>
           </button>
-        ))}
+        </div>
+
+        {isMenuOpen && (
+          <div className="bg-white border-t border-neutral-200 shadow-sm">
+            {[
+              { to: "/", label: "Home", icon: "fa-home" },
+              { to: "/search", label: "Find Artisans", icon: "fa-search" },
+              { to: "/artisan", label: "Artisan Dashboard", icon: "fa-toolbox" },
+              { to: "/contact", label: "Contact", icon: "fa-envelope" },
+            ].map(({ to, label, icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `block py-3 px-6 ${
+                    isActive
+                      ? 'bg-neutral-100 text-neutral-900 font-medium'
+                      : 'text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900'
+                  }`
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <i className={`fas ${icon} mr-3`}></i>{label}
+              </NavLink>
+            ))}
+            <div className="border-t py-3 px-6">
+              {currentUser ? (
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-center bg-neutral-800 text-white py-2 rounded hover:bg-neutral-700 transition"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block w-full text-center bg-neutral-800 text-white py-2 rounded hover:bg-neutral-700 transition"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              )}
+              <p className="text-center mt-2 text-sm text-neutral-600">
+                Don't have an account?
+                <Link
+                  to="/signup"
+                  className="text-blue-600 hover:underline ml-1"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:block">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <Link to="/" className="text-xl font-semibold text-neutral-800 flex items-center">
+              <i className="fas fa-hammer mr-2 text-blue-500"></i>CraftConnect
+            </Link>
+
+            {/* Nav Links */}
+            <nav className="hidden lg:flex space-x-6">
+              {[
+                { to: "/", label: "Home" },
+                { to: "/search", label: "Find Artisans" },
+                { to: "/artisan", label: "For Artisans" },
+                { to: "/contact", label: "Contact" },
+              ].map(({ to, label }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  className={({ isActive }) =>
+                    `text-sm font-medium ${
+                      isActive
+                        ? 'text-neutral-900 border-b-2 border-blue-500 pb-1'
+                        : 'text-neutral-700 hover:text-neutral-900 hover:border-b-2 hover:border-blue-300 pb-1'
+                    } transition`
+                  }
+                >
+                  {label}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Auth Buttons */}
+            <div className="flex items-center space-x-4">
+              {currentUser ? (
+                <>
+                  <Link
+                    to="/homeowner"
+                    className="bg-neutral-800 text-white text-sm font-medium px-4 py-2 rounded hover:bg-neutral-700 transition"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="text-neutral-700 hover:text-neutral-900 text-sm font-medium transition"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-neutral-700 hover:text-neutral-900 text-sm font-medium transition"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="bg-neutral-800 text-white text-sm font-medium px-4 py-2 rounded hover:bg-neutral-700 transition"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };
 
