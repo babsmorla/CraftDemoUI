@@ -161,7 +161,6 @@ const UserJobsPage = () => {
             <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
               My Job Requests
             </h1>
-            
           </div>
           <button
             onClick={() => navigate("/search")}

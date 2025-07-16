@@ -10,10 +10,9 @@ const ArtisanAddEditServicesPage = () => {
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       services: artisanServices.services,
-      pricingNotes:
-        Array.isArray(artisanServices.pricingNotes)
-          ? artisanServices.pricingNotes.join("\n")
-          : artisanServices.pricingNotes || "",
+      pricingNotes: Array.isArray(artisanServices.pricingNotes)
+        ? artisanServices.pricingNotes.join("\n")
+        : artisanServices.pricingNotes || "",
     },
   });
 
@@ -45,7 +44,9 @@ const ArtisanAddEditServicesPage = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Add / Edit Services</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          Add / Edit Services
+        </h1>
         <button
           onClick={() => navigate("/artisan/services")}
           className="text-sm text-indigo-600 hover:underline"
@@ -63,7 +64,9 @@ const ArtisanAddEditServicesPage = () => {
               className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-4"
             >
               <div className="flex justify-between items-center">
-                <h2 className="font-medium text-gray-700">Service {index + 1}</h2>
+                <h2 className="font-medium text-gray-700">
+                  Service {index + 1}
+                </h2>
                 <button
                   type="button"
                   onClick={() => remove(index)}
@@ -74,7 +77,9 @@ const ArtisanAddEditServicesPage = () => {
               </div>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-600">Service Title</label>
+                  <label className="block text-sm font-medium text-gray-600">
+                    Service Title
+                  </label>
                   <input
                     {...register(`services.${index}.service`)}
                     placeholder="e.g. Furniture Assembly"
@@ -82,7 +87,9 @@ const ArtisanAddEditServicesPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-600">Description</label>
+                  <label className="block text-sm font-medium text-gray-600">
+                    Description
+                  </label>
                   <textarea
                     {...register(`services.${index}.description`)}
                     placeholder="Brief description"
@@ -91,7 +98,9 @@ const ArtisanAddEditServicesPage = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-600">Price</label>
+                    <label className="block text-sm font-medium text-gray-600">
+                      Price
+                    </label>
                     <input
                       {...register(`services.${index}.price`)}
                       placeholder="e.g. GHS 250/hr"
@@ -99,7 +108,9 @@ const ArtisanAddEditServicesPage = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-600">Estimated Time</label>
+                    <label className="block text-sm font-medium text-gray-600">
+                      Estimated Time
+                    </label>
                     <input
                       {...register(`services.${index}.estimatedTime`)}
                       placeholder="e.g. 1-3 hours"
@@ -130,7 +141,9 @@ const ArtisanAddEditServicesPage = () => {
 
         {/* Pricing Notes */}
         <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Pricing Notes</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Pricing Notes
+          </label>
           <textarea
             {...register("pricingNotes")}
             rows={5}

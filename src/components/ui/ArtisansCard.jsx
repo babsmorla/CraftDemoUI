@@ -1,7 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { BadgeCheck, ShieldOff, Phone, MessageCircle, MapPin, Hammer } from 'lucide-react';
-import RatingStars from './RatingStars';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  BadgeCheck,
+  ShieldOff,
+  Phone,
+  MessageCircle,
+  MapPin,
+  Hammer,
+} from "lucide-react";
+import RatingStars from "./RatingStars";
 
 const ArtisanCard = ({ artisan }) => {
   if (!artisan) return null;
@@ -9,7 +16,7 @@ const ArtisanCard = ({ artisan }) => {
   const renderVerificationBadge = () => {
     if (artisan.verificationStatus === "verified") {
       return (
-        <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-0.5 rounded flex items-center text-xs font-medium">
+        <div className="absolute top-2 right-2 bg-indigo-600 text-white px-2 py-0.5 rounded flex items-center text-xs font-medium">
           <BadgeCheck size={14} className="mr-1" /> Verified
         </div>
       );
@@ -29,7 +36,7 @@ const ArtisanCard = ({ artisan }) => {
         <div className="md:w-1/4">
           <div className="h-48 md:h-full bg-gray-100 relative">
             <img
-              src={artisan.profilePic || '/profiles/default-artisan.jpg'}
+              src={artisan.profilePic || "/profiles/default-artisan.jpg"}
               alt={artisan.name || artisan.businessName}
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -105,34 +112,32 @@ const ArtisanCard = ({ artisan }) => {
           </div>
 
           {/* Actions */}
-         <div className="mt-4 flex flex-wrap gap-2">
-  {artisan.whatsapp && (
-    <a
-      href={`https://wa.me/${artisan.whatsapp}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded flex items-center text-sm transition-colors"
-    >
-      <MessageCircle size={16} className="mr-1" /> WhatsApp
-    </a>
-  )}
-  {artisan.phone && (
-    <a
-      href={`tel:${artisan.phone}`}
-      className="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded flex items-center text-sm transition-colors"
-    >
-      <Phone size={16} className="mr-1" /> Call Now
-    </a>
-  )}
-  <Link
-    to={`/artisan/${artisan.id}`}
-    className="border border-neutral-300 text-neutral-700 hover:bg-neutral-100 px-3 py-1.5 rounded text-sm transition-colors"
-  >
-    View Profile
-  </Link>
-</div>
-
-
+          <div className="mt-4 flex flex-wrap gap-2">
+            {artisan.whatsapp && (
+              <a
+                href={`https://wa.me/${artisan.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded flex items-center text-sm transition-colors"
+              >
+                <MessageCircle size={16} className="mr-1" /> WhatsApp
+              </a>
+            )}
+            {artisan.phone && (
+              <a
+                href={`tel:${artisan.phone}`}
+                className="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded flex items-center text-sm transition-colors"
+              >
+                <Phone size={16} className="mr-1" /> Call Now
+              </a>
+            )}
+            <Link
+              to={`/artisan/${artisan.id}`}
+              className="border border-neutral-300 text-neutral-700 hover:bg-neutral-100 px-3 py-1.5 rounded text-sm transition-colors"
+            >
+              View Profile
+            </Link>
+          </div>
         </div>
       </div>
     </div>

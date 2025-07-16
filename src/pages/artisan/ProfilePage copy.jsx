@@ -1,47 +1,51 @@
-import React, { useState } from 'react';
-import RatingStars from '../../components/ui/RatingStars';
-import { useAuth } from '../../contexts/AuthContext';
+import React, { useState } from "react";
+import RatingStars from "../../components/ui/RatingStars";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ProfilePage = () => {
   const { currentUser } = useAuth();
   const [profile, setProfile] = useState({
     name: "Kwame Mensah",
     businessName: "Kwame Mensah Plumbing",
-    description: "Professional plumber with 12 years of experience. Specializing in pipe repairs, installations, and maintenance.",
+    description:
+      "Professional plumber with 12 years of experience. Specializing in pipe repairs, installations, and maintenance.",
     location: "Kumasi, Ashanti Region",
     experience: "12 years",
-    specialties: ["Pipe Repair", "Installation", "Leak Detection", "Water Heater"],
+    specialties: [
+      "Pipe Repair",
+      "Installation",
+      "Leak Detection",
+      "Water Heater",
+    ],
     hourlyRate: 25,
     phone: "+233201234567",
-    whatsapp: "+233201234567"
+    whatsapp: "+233201234567",
   });
 
-  
-  
   const [isEditing, setIsEditing] = useState(false);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile(prev => ({ ...prev, [name]: value }));
+    setProfile((prev) => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSpecialtyChange = (index, value) => {
     const newSpecialties = [...profile.specialties];
     newSpecialties[index] = value;
-    setProfile(prev => ({ ...prev, specialties: newSpecialties }));
+    setProfile((prev) => ({ ...prev, specialties: newSpecialties }));
   };
-  
+
   const addSpecialty = () => {
-    setProfile(prev => ({ ...prev, specialties: [...prev.specialties, ""] }));
+    setProfile((prev) => ({ ...prev, specialties: [...prev.specialties, ""] }));
   };
-  
+
   const removeSpecialty = (index) => {
-    setProfile(prev => ({ 
-      ...prev, 
-      specialties: prev.specialties.filter((_, i) => i !== index) 
+    setProfile((prev) => ({
+      ...prev,
+      specialties: prev.specialties.filter((_, i) => i !== index),
     }));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
@@ -56,30 +60,30 @@ const ProfilePage = () => {
             <h1 className="text-2xl font-bold">Your Profile</h1>
             {isEditing ? (
               <div className="space-x-2">
-                <button 
+                <button
                   onClick={() => setIsEditing(false)}
                   className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300"
                 >
                   Cancel
                 </button>
-                <button 
+                <button
                   onClick={handleSubmit}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                  className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
                 >
                   Save Changes
                 </button>
               </div>
             ) : (
-              <button 
+              <button
                 onClick={() => setIsEditing(true)}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
               >
                 Edit Profile
               </button>
             )}
           </div>
         </div>
-        
+
         <div className="p-6">
           <div className="flex flex-col md:flex-row gap-8">
             {/* Left Column - Profile Photo */}
@@ -98,19 +102,19 @@ const ProfilePage = () => {
                   </div>
                 )}
               </div>
-              
+
               <div className="bg-blue-50 p-4 rounded-lg">
                 <h3 className="font-semibold mb-2">Profile Visibility</h3>
                 <div className="flex items-center">
                   <div className="relative inline-block w-10 mr-2 align-middle select-none">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      type="checkbox"
                       id="visibility-toggle"
                       className="sr-only"
                       defaultChecked
                     />
-                    <label 
-                      htmlFor="visibility-toggle" 
+                    <label
+                      htmlFor="visibility-toggle"
                       className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
                     >
                       <span className="block h-6 w-6 rounded-full bg-white shadow transform transition ease-in-out duration-200 translate-x-0"></span>
@@ -121,17 +125,20 @@ const ProfilePage = () => {
                   </label>
                 </div>
                 <p className="text-sm text-gray-600 mt-2">
-                  When enabled, your profile will be visible to homeowners searching for services
+                  When enabled, your profile will be visible to homeowners
+                  searching for services
                 </p>
               </div>
             </div>
-            
+
             {/* Right Column - Profile Info */}
             <div className="md:w-2/3">
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-gray-700 mb-2">Full Name</label>
+                    <label className="block text-gray-700 mb-2">
+                      Full Name
+                    </label>
                     {isEditing ? (
                       <input
                         type="text"
@@ -145,7 +152,9 @@ const ProfilePage = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2">Business Name</label>
+                    <label className="block text-gray-700 mb-2">
+                      Business Name
+                    </label>
                     {isEditing ? (
                       <input
                         type="text"
@@ -173,7 +182,9 @@ const ProfilePage = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2">Years of Experience</label>
+                    <label className="block text-gray-700 mb-2">
+                      Years of Experience
+                    </label>
                     {isEditing ? (
                       <input
                         type="text"
@@ -187,7 +198,9 @@ const ProfilePage = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2">Hourly Rate ($)</label>
+                    <label className="block text-gray-700 mb-2">
+                      Hourly Rate ($)
+                    </label>
                     {isEditing ? (
                       <input
                         type="number"
@@ -201,7 +214,9 @@ const ProfilePage = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2">Phone Number</label>
+                    <label className="block text-gray-700 mb-2">
+                      Phone Number
+                    </label>
                     {isEditing ? (
                       <input
                         type="tel"
@@ -215,7 +230,9 @@ const ProfilePage = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2">WhatsApp Number</label>
+                    <label className="block text-gray-700 mb-2">
+                      WhatsApp Number
+                    </label>
                     {isEditing ? (
                       <input
                         type="tel"
@@ -229,9 +246,11 @@ const ProfilePage = () => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="mb-6">
-                  <label className="block text-gray-700 mb-2">Specialties</label>
+                  <label className="block text-gray-700 mb-2">
+                    Specialties
+                  </label>
                   {isEditing ? (
                     <div className="space-y-2">
                       {profile.specialties.map((specialty, index) => (
@@ -239,10 +258,12 @@ const ProfilePage = () => {
                           <input
                             type="text"
                             value={specialty}
-                            onChange={(e) => handleSpecialtyChange(index, e.target.value)}
+                            onChange={(e) =>
+                              handleSpecialtyChange(index, e.target.value)
+                            }
                             className="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
-                          <button 
+                          <button
                             type="button"
                             onClick={() => removeSpecialty(index)}
                             className="ml-2 text-red-600 hover:text-red-800"
@@ -251,7 +272,7 @@ const ProfilePage = () => {
                           </button>
                         </div>
                       ))}
-                      <button 
+                      <button
                         type="button"
                         onClick={addSpecialty}
                         className="text-blue-600 hover:text-blue-800 mt-2"
@@ -262,8 +283,8 @@ const ProfilePage = () => {
                   ) : (
                     <div className="flex flex-wrap gap-2">
                       {profile.specialties.map((specialty, index) => (
-                        <span 
-                          key={index} 
+                        <span
+                          key={index}
                           className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
                         >
                           {specialty}
@@ -272,9 +293,11 @@ const ProfilePage = () => {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="mb-6">
-                  <label className="block text-gray-700 mb-2">Description</label>
+                  <label className="block text-gray-700 mb-2">
+                    Description
+                  </label>
                   {isEditing ? (
                     <textarea
                       name="description"

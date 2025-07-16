@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import ArtisansCard from '../../components/ui/ArtisansCard';
-import { publicArtisanProfiles as artisans } from '../data/dummyData';
-import { MapPin, Search, Star } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import ArtisansCard from "../../components/ui/ArtisansCard";
+import { publicArtisanProfiles as artisans } from "../data/dummyData";
+import { MapPin, Search, Star } from "lucide-react";
 
 const LOCATIONS = [
   "Greater Accra",
@@ -28,27 +28,31 @@ const SearchPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  const [searchTerm, setSearchTerm] = useState(queryParams.get('q') || '');
-  const [locationFilter, setLocationFilter] = useState(queryParams.get('location') || '');
-  const [craftFilter, setCraftFilter] = useState('');
+  const [searchTerm, setSearchTerm] = useState(queryParams.get("q") || "");
+  const [locationFilter, setLocationFilter] = useState(
+    queryParams.get("location") || ""
+  );
+  const [craftFilter, setCraftFilter] = useState("");
   const [selectedRatings, setSelectedRatings] = useState([]);
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [filteredArtisans, setFilteredArtisans] = useState([]);
 
   const handleRatingToggle = (rating) => {
-    setSelectedRatings(prev =>
-      prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]
+    setSelectedRatings((prev) =>
+      prev.includes(rating)
+        ? prev.filter((r) => r !== rating)
+        : [...prev, rating]
     );
   };
 
   const handleApplyFilters = () => {
     const lowerSearch = searchTerm.trim().toLowerCase();
 
-    const results = artisans.filter(artisan => {
+    const results = artisans.filter((artisan) => {
       const matchesSearch =
         artisan.businessName.toLowerCase().includes(lowerSearch) ||
         artisan.craft?.toLowerCase().includes(lowerSearch) ||
-        artisan.specialties?.some(s => s.toLowerCase().includes(lowerSearch));
+        artisan.specialties?.some((s) => s.toLowerCase().includes(lowerSearch));
 
       const matchesLocation = locationFilter
         ? artisan.location?.toLowerCase().includes(locationFilter.toLowerCase())
@@ -62,20 +66,29 @@ const SearchPage = () => {
         ? artisan.verificationStatus === "verified"
         : true;
 
-      const matchesRating = selectedRatings.length > 0
-        ? selectedRatings.some(rating => Math.floor(artisan.rating) >= rating)
-        : true;
+      const matchesRating =
+        selectedRatings.length > 0
+          ? selectedRatings.some(
+              (rating) => Math.floor(artisan.rating) >= rating
+            )
+          : true;
 
-      return matchesSearch && matchesLocation && matchesCraft && matchesVerified && matchesRating;
+      return (
+        matchesSearch &&
+        matchesLocation &&
+        matchesCraft &&
+        matchesVerified &&
+        matchesRating
+      );
     });
 
     setFilteredArtisans(results);
   };
 
   const handleResetFilters = () => {
-    setSearchTerm('');
-    setLocationFilter('');
-    setCraftFilter('');
+    setSearchTerm("");
+    setLocationFilter("");
+    setCraftFilter("");
     setSelectedRatings([]);
     setVerifiedOnly(false);
     setFilteredArtisans(artisans);
@@ -88,8 +101,12 @@ const SearchPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Find Skilled Artisans</h1>
-        <p className="text-gray-600 max-w-lg">Search for trusted professionals in your area</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+          Find Skilled Artisans
+        </h1>
+        <p className="text-gray-600 max-w-lg">
+          Search for trusted professionals in your area
+        </p>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
@@ -100,40 +117,53 @@ const SearchPage = () => {
 
             {/* Location Filter */}
             <div>
-              <label className="block text-gray-700 mb-1 font-medium">Location</label>
+              <label className="block text-gray-700 mb-1 font-medium">
+                Location
+              </label>
               <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 value={locationFilter}
                 onChange={(e) => setLocationFilter(e.target.value)}
               >
                 <option value="">All of Ghana</option>
-                {LOCATIONS.map(loc => (
-                  <option key={loc} value={loc}>{loc}</option>
+                {LOCATIONS.map((loc) => (
+                  <option key={loc} value={loc}>
+                    {loc}
+                  </option>
                 ))}
               </select>
             </div>
 
             {/* Craft Filter */}
             <div>
-              <label className="block text-gray-700 mb-1 font-medium">Craft</label>
+              <label className="block text-gray-700 mb-1 font-medium">
+                Craft
+              </label>
               <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 value={craftFilter}
                 onChange={(e) => setCraftFilter(e.target.value)}
               >
                 <option value="">All Crafts</option>
-                {CRAFTS.map(craft => (
-                  <option key={craft} value={craft}>{craft}</option>
+                {CRAFTS.map((craft) => (
+                  <option key={craft} value={craft}>
+                    {craft}
+                  </option>
                 ))}
               </select>
             </div>
 
             {/* Rating Filter */}
             <div>
-              <label className="block text-gray-700 mb-1 font-medium">Rating</label>
+              <label className="block text-gray-700 mb-1 font-medium">
+                Rating
+              </label>
               <div className="space-y-2">
-                {RATINGS.map(rating => (
-                  <label key={rating} className="flex items-center space-x-2 cursor-pointer">
+                {RATINGS.map((rating) => (
+                  <label
+                    key={rating}
+                    className="flex items-center space-x-2 cursor-pointer"
+                  >
                     <input
                       type="checkbox"
                       checked={selectedRatings.includes(rating)}
@@ -147,7 +177,9 @@ const SearchPage = () => {
                       {[...Array(5 - rating)].map((_, idx) => (
                         <Star key={idx} size={16} className="text-gray-300" />
                       ))}
-                      <span className="text-gray-700 text-sm ml-1">{rating}+</span>
+                      <span className="text-gray-700 text-sm ml-1">
+                        {rating}+
+                      </span>
                     </div>
                   </label>
                 ))}
@@ -204,19 +236,19 @@ const SearchPage = () => {
             </button>
           </div>
 
-          
-
           {/* Artisan Results */}
           <div className="space-y-4">
             {filteredArtisans.length > 0 ? (
-              filteredArtisans.map(artisan => (
+              filteredArtisans.map((artisan) => (
                 <ArtisansCard key={artisan.id} artisan={artisan} />
               ))
             ) : (
               <div className="flex flex-col items-center justify-center bg-white rounded-xl border border-gray-200 p-8 text-center space-y-2">
                 <Search size={32} className="text-gray-400" />
                 <h3 className="text-lg font-semibold">No artisans found</h3>
-                <p className="text-gray-500 text-sm">Try adjusting your search filters.</p>
+                <p className="text-gray-500 text-sm">
+                  Try adjusting your search filters.
+                </p>
               </div>
             )}
           </div>

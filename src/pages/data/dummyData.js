@@ -164,7 +164,7 @@ export const publicArtisanProfiles = [
     whatsapp: "+233208765432",
     phone: "+233208765432",
     accountStatus: "Active",
-    verificationStatus: "verified",
+    verificationStatus: "pending",
     portfolio: [
       "https://images.unsplash.com/photo-1597092960613-210ae312f79e",
       "https://images.unsplash.com/photo-1581579185169-1b42c1fca735",
@@ -537,7 +537,7 @@ export const artisanVerificationStatus = {
   verificationStatus: "approved", // "pending", "approved", "rejected"
   submittedAt: "2025-07-01T09:30:00Z",
   reviewedAt: "2025-07-04T15:20:00Z", // null if not yet reviewed
-  rejectionReason: null, // if rejected, will contain reason
+  rejectionReason: "", // if rejected, will contain reason
   documents: [
     { type: "id_front", url: "/uploads/id_front.jpg", verified: true },
     { type: "id_back", url: "/uploads/id_back.jpg", verified: true },
@@ -566,8 +566,8 @@ export const userJobs = [
     location: "Accra, Spintex Road",
     userId: "user_123",
     artisanId: "art_789",
-    status: "declined",
-    declineReason: "no",
+    status: "pending",
+    declineReason: "",
     cancellationReason: "",
     images: [
       "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",

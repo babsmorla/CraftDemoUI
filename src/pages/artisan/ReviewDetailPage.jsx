@@ -69,7 +69,9 @@ function AdminReviewDetailPage() {
           {/* Review Header */}
           <div className="flex justify-between items-start mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">Review Details</h2>
+              <h2 className="text-2xl font-bold text-gray-800">
+                Review Details
+              </h2>
               <div className="flex items-center mt-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
@@ -101,8 +103,8 @@ function AdminReviewDetailPage() {
               <h3 className="font-medium text-gray-800 mb-3">Customer</h3>
               <div className="flex items-center">
                 <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                  <img 
-                    src={review.user.profilePic} 
+                  <img
+                    src={review.user.profilePic}
                     alt={review.user.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -125,8 +127,8 @@ function AdminReviewDetailPage() {
               <h3 className="font-medium text-gray-800 mb-3">Artisan</h3>
               <div className="flex items-center">
                 <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                  <img 
-                    src={review.artisan.profilePic} 
+                  <img
+                    src={review.artisan.profilePic}
                     alt={review.artisan.businessName}
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -160,7 +162,8 @@ function AdminReviewDetailPage() {
                 Admin Action
               </label>
               <p className="text-sm text-gray-600 mb-4">
-                This action will permanently delete this review without notifying the user or artisan.
+                This action will permanently delete this review without
+                notifying the user or artisan.
               </p>
             </div>
 

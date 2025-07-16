@@ -92,8 +92,10 @@ const Navbar = () => {
               {[
                 { to: "/", label: "Home" },
                 { to: "/search", label: "Find Artisans" },
-                { to: "/artisan", label: "For Artisans" },
+                { to: "/artisan", label: "Temporal For An Artisan" },
                 { to: "/contact", label: "Contact" },
+                { to: "/admin", label: "Temporal For Admin" },
+                { to: "/signup", label: "SignUp" },
               ].map(({ to, label }) => (
                 <NavLink
                   key={to}

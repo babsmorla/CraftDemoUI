@@ -21,8 +21,12 @@ const ArtisanJobDetailPage = () => {
     return (
       <div className="max-w-screen-sm mx-auto px-4 py-12 text-center">
         <div className="bg-white rounded-xl p-8 shadow">
-          <h2 className="text-lg font-semibold text-gray-800 mb-2">Job Not Found</h2>
-          <p className="text-gray-600 mb-4">This job may not exist or has been removed.</p>
+          <h2 className="text-lg font-semibold text-gray-800 mb-2">
+            Job Not Found
+          </h2>
+          <p className="text-gray-600 mb-4">
+            This job may not exist or has been removed.
+          </p>
           <button
             onClick={() => navigate(-1)}
             className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
@@ -57,7 +61,9 @@ const ArtisanJobDetailPage = () => {
       <div className="bg-white rounded-xl shadow p-5 mb-6">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{job.title}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+              {job.title}
+            </h1>
             <div className="flex items-center mt-2 space-x-2">
               <span
                 className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[job.status]}`}
@@ -75,14 +81,18 @@ const ArtisanJobDetailPage = () => {
           </div>
         </div>
         {job.description && (
-          <p className="text-gray-700 mt-3 leading-relaxed">{job.description}</p>
+          <p className="text-gray-700 mt-3 leading-relaxed">
+            {job.description}
+          </p>
         )}
       </div>
 
       {/* Image Gallery */}
       {job.images?.length > 0 && (
         <div className="bg-white rounded-xl shadow p-5 mb-6">
-          <h2 className="text-lg font-semibold mb-3 text-gray-800">Job Photos</h2>
+          <h2 className="text-lg font-semibold mb-3 text-gray-800">
+            Job Photos
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {job.images.map((src, idx) => (
               <div
@@ -127,7 +137,9 @@ const ArtisanJobDetailPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {/* Job Details */}
         <div className="bg-white rounded-xl shadow p-5">
-          <h2 className="text-lg font-semibold mb-3 text-gray-800">Job Details</h2>
+          <h2 className="text-lg font-semibold mb-3 text-gray-800">
+            Job Details
+          </h2>
           <div className="space-y-3">
             <div className="flex items-center space-x-3">
               <div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
@@ -168,7 +180,9 @@ const ArtisanJobDetailPage = () => {
         {/* Customer Info */}
         {job.user && (
           <div className="bg-white rounded-xl shadow p-5">
-            <h2 className="text-lg font-semibold mb-3 text-gray-800">Customer Information</h2>
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">
+              Customer Information
+            </h2>
             <div className="flex space-x-4 items-start">
               <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-lg font-semibold text-gray-700">
                 {job.user.name.charAt(0)}
@@ -178,13 +192,19 @@ const ArtisanJobDetailPage = () => {
                 <div className="mt-2 space-y-1 text-sm text-gray-600">
                   <div className="flex items-center space-x-2">
                     <FaPhone className="text-indigo-600" />
-                    <a href={`tel:${job.user.phone}`} className="hover:text-indigo-700">
+                    <a
+                      href={`tel:${job.user.phone}`}
+                      className="hover:text-indigo-700"
+                    >
                       {job.user.phone}
                     </a>
                   </div>
                   <div className="flex items-center space-x-2">
                     <FaEnvelope className="text-indigo-600" />
-                    <a href={`mailto:${job.user.email}`} className="hover:text-indigo-700">
+                    <a
+                      href={`mailto:${job.user.email}`}
+                      className="hover:text-indigo-700"
+                    >
                       {job.user.email}
                     </a>
                   </div>
@@ -203,7 +223,7 @@ const ArtisanJobDetailPage = () => {
       {job.status === "accepted" && (
         <div className="bg-white rounded-xl shadow p-5 flex flex-col sm:flex-row gap-3">
           <button
-            onClick={() => window.location.href = `tel:${job.user.phone}`}
+            onClick={() => (window.location.href = `tel:${job.user.phone}`)}
             className="w-full sm:w-auto px-4 py-2.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center justify-center gap-2"
           >
             <FaPhone />

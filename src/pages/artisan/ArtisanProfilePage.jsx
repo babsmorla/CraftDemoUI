@@ -186,7 +186,7 @@ const ArtisanProfilePage = () => {
                         ? "Portfolio"
                         : "Services & Pricing"}
                   {activeTab === tab && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600"></div>
                   )}
                 </button>
               ))}
@@ -359,7 +359,7 @@ const ArtisanProfilePage = () => {
                       className={`px-4 py-2 rounded-lg font-medium ${
                         isSubmitting || rating === 0
                           ? "bg-gray-300 cursor-not-allowed"
-                          : "bg-blue-600 hover:bg-blue-700 text-white"
+                          : "bg-indigo-600 hover:bg-blue-700 text-white"
                       }`}
                     >
                       {isSubmitting ? "Submitting..." : "Submit Review"}
@@ -710,7 +710,9 @@ const JobRequestModal = ({ isOpen, onClose, artisan }) => {
                 type="submit"
                 disabled={isSubmitting}
                 className={`px-4 py-2 rounded-lg text-sm font-medium text-white ${
-                  isSubmitting ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"
+                  isSubmitting
+                    ? "bg-blue-400"
+                    : "bg-indigo-600 hover:bg-blue-700"
                 }`}
               >
                 {isSubmitting ? "Submitting..." : "Submit Request"}

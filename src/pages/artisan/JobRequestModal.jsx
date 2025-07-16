@@ -189,7 +189,7 @@ const JobRequestModal = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-4 py-2 rounded-md text-sm font-medium text-white ${isSubmitting ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"}`}
+                className={`px-4 py-2 rounded-md text-sm font-medium text-white ${isSubmitting ? "bg-blue-400" : "bg-indigo-600 hover:bg-blue-700"}`}
               >
                 {isSubmitting ? "Submitting..." : "Submit Request"}
               </button>

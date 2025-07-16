@@ -4,7 +4,6 @@ import { artisanProfile } from "../data/dummyData";
 
 function ProfilePage() {
   const navigate = useNavigate();
-
   const defaultValues = artisanProfile;
 
   const {
@@ -22,99 +21,95 @@ function ProfilePage() {
   } = defaultValues;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Artisan Profile</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900">
+            Artisan Profile
+          </h1>
+          <p className="text-sm sm:text-base text-neutral-600 mt-1">
             Your professional profile as shown to clients
           </p>
         </div>
-        <div>
-          <button
-            onClick={() => navigate("/artisan/profile/edit")}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+        <button
+          onClick={() => navigate("/artisan/profile/edit")}
+          className="mt-3 sm:mt-0 inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-            </svg>
-            Edit Profile
-          </button>
-        </div>
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+          </svg>
+          Edit Profile
+        </button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-6 md:p-8">
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Left Column - Profile Photo & Availability */}
-            <div className="md:w-1/3">
-              <div className="mb-6">
-                <div className="relative w-48 h-48 mx-auto">
-                  <div className="rounded-full overflow-hidden border-4 border-white shadow-lg w-full h-full">
-                    <img
-                      src={profileImageUrl}
-                      alt={name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+      <div className="bg-white border border-neutral-200 rounded-lg shadow-sm overflow-hidden">
+        <div className="p-5 sm:p-6">
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Profile Image & Contact */}
+            <div className="md:w-1/3 flex flex-col gap-6">
+              <div className="flex justify-center">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-white shadow">
+                  <img
+                    src={profileImageUrl}
+                    alt={name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-5 mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+              <div className="bg-neutral-50 rounded p-4">
+                <h3 className="text-base font-semibold text-neutral-800 mb-2">
                   Specialization
                 </h3>
-                <div className="flex items-center">
-                  <span className="text-gray-700">{craft}</span>
-                </div>
+                <p className="text-neutral-700">{craft}</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-5">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+              <div className="bg-neutral-50 rounded p-4">
+                <h3 className="text-base font-semibold text-neutral-800 mb-2">
                   Contact Information
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <div>
-                    <p className="text-sm text-gray-500">Phone</p>
-                    <p className="text-gray-800 font-medium">{phone}</p>
+                    <p className="text-xs text-neutral-500">Phone</p>
+                    <p className="text-sm text-neutral-800">{phone}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">WhatsApp</p>
-                    <p className="text-gray-800 font-medium">{whatsapp}</p>
+                    <p className="text-xs text-neutral-500">WhatsApp</p>
+                    <p className="text-sm text-neutral-800">{whatsapp}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Profile Details */}
-            <div className="md:w-2/3">
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-800">{name}</h2>
-                <h3 className="text-xl text-indigo-600 font-medium">
+            {/* Profile Details */}
+            <div className="md:w-2/3 flex flex-col gap-6">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                  {name}
+                </h2>
+                <p className="text-lg text-indigo-600 font-medium">
                   {businessName}
-                </h3>
-
-                <div className="mt-4">
-                  <p className="text-gray-700 whitespace-pre-line">
-                    {description}
-                  </p>
-                </div>
+                </p>
+                <p className="mt-3 text-sm sm:text-base text-neutral-700 whitespace-pre-line">
+                  {description}
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 rounded-lg p-5">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-neutral-50 rounded p-4">
+                  <h3 className="text-base font-semibold text-neutral-800 mb-2">
                     Location
                   </h3>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2 text-neutral-700 text-sm">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-gray-500 mr-2"
+                      className="h-4 w-4 text-neutral-500"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -124,18 +119,18 @@ function ProfilePage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <p className="text-gray-700">{location}</p>
+                    {location}
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-5">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                <div className="bg-neutral-50 rounded p-4">
+                  <h3 className="text-base font-semibold text-neutral-800 mb-2">
                     Experience
                   </h3>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2 text-neutral-700 text-sm">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-gray-500 mr-2"
+                      className="h-4 w-4 text-neutral-500"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -145,18 +140,18 @@ function ProfilePage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <p className="text-gray-700">{experience}</p>
+                    {experience}
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-5">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                <div className="bg-neutral-50 rounded p-4">
+                  <h3 className="text-base font-semibold text-neutral-800 mb-2">
                     Hourly Rate
                   </h3>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2 text-neutral-700 text-sm">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-gray-500 mr-2"
+                      className="h-4 w-4 text-neutral-500"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -167,25 +162,25 @@ function ProfilePage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <p className="text-gray-700">${hourlyRate}/hr</p>
+                    ${hourlyRate}/hr
                   </div>
                 </div>
               </div>
 
-              {/* Specialties Section */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              {/* Specialties */}
+              <div>
+                <h3 className="text-base font-semibold text-neutral-800 mb-3">
                   Specialties
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {specialties.map((specialty, idx) => (
-                    <div
+                    <span
                       key={idx}
-                      className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full flex items-center"
+                      className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm flex items-center gap-1"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-1"
+                        className="h-4 w-4"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -196,13 +191,10 @@ function ProfilePage() {
                         />
                       </svg>
                       {specialty}
-                    </div>
+                    </span>
                   ))}
                 </div>
               </div>
-
-             
-
             </div>
           </div>
         </div>

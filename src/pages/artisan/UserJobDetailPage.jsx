@@ -222,7 +222,7 @@ const UserJobDetailPage = () => {
         {job.status === "accepted" && (
           <button
             onClick={() => (window.location.href = `tel:${job.artisan.phone}`)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm font-medium"
+            className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm font-medium"
           >
             <FaPhone />
             Call Artisan

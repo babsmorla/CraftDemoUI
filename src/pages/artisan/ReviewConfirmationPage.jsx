@@ -6,7 +6,7 @@ function ReviewConfirmationPage() {
   const { artisanId } = useParams();
   const location = useLocation();
   const { review, artisanName, businessName } = location.state || {};
-  
+
   if (!review) {
     navigate(`/review/${artisanId}`);
     return null;
@@ -16,11 +16,22 @@ function ReviewConfirmationPage() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 text-green-600"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Review Submitted!</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          Review Submitted!
+        </h1>
         <p className="text-gray-600">
           Thank you for reviewing {artisanName} from {businessName}
         </p>
@@ -31,21 +42,22 @@ function ReviewConfirmationPage() {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               {[...Array(5)].map((_, i) => (
-                <span 
-                  key={i} 
+                <span
+                  key={i}
                   className={`text-3xl mx-1 ${
-                    i < review.rating ? 'text-yellow-500' : 'text-gray-300'
+                    i < review.rating ? "text-yellow-500" : "text-gray-300"
                   }`}
                 >
                   ★
                 </span>
               ))}
             </div>
-            <p className="text-lg text-gray-700 italic">
-              "{review.comment}"
-            </p>
+            <p className="text-lg text-gray-700 italic">"{review.comment}"</p>
             <p className="text-sm text-gray-500 mt-4">
-              Status: <span className="text-yellow-600 font-medium">Pending approval</span>
+              Status:{" "}
+              <span className="text-yellow-600 font-medium">
+                Pending approval
+              </span>
             </p>
           </div>
 

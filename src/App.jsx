@@ -55,8 +55,11 @@ import UserDashboard from "./pages/artisan/UserDashbord.";
 import UserReviewsPage from "./pages/artisan/UserReviewsPage";
 import AdminDashboardPage from "./pages/artisan/AdminDashboardPage";
 import ArtisanAddEditServicesPage from "./pages/artisan/ArtisanEditServicesPage";
+import ResetPassword from "./pages/auth/ResetPassword";
+import { createBrowserRouter } from "react-router";
 
 function App() {
+  
   return (
     <Router>
       <Routes>
@@ -106,9 +109,12 @@ function App() {
           <Route path="users" element={<UserListPage />} />
           <Route path="users/:userId" element={<UserDetailPage />} />
         </Route>
+
+
         {/* Auth Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/reset" element={<ResetPassword />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
         {/* 404 Page */}
@@ -126,3 +132,12 @@ function App() {
 }
 
 export default App;
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello World</div>,
+  },
+]);

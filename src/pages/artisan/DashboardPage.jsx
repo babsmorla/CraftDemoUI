@@ -36,7 +36,7 @@ const DashboardPage = () => {
         </div>
         <Link
           to="/artisan/profile"
-          className="w-full sm:w-auto text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm sm:text-base transition-colors"
+          className="w-full sm:w-auto text-center bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm sm:text-base transition-colors"
         >
           Edit Profile
         </Link>

@@ -10,6 +10,7 @@ import {
   Bell,
   Shield,
   Edit,
+  Star,
 } from "lucide-react";
 
 const DashboardLayout = () => {
@@ -41,7 +42,7 @@ const DashboardLayout = () => {
       icon: <Wrench className="w-5 h-5" />,
       label: "Services",
     },
-     {
+    {
       path: "/artisan/services-edit",
       icon: <Edit className="w-5 h-5" />,
       label: "Add/Edit Serivices",
@@ -56,6 +57,11 @@ const DashboardLayout = () => {
       icon: <Shield className="w-5 h-5" />,
       label: "Verification Status",
     },
+    {
+      path: "/artisan/verify/reviews",
+      icon: <Star className="w-5 h-5" />,
+      label: "Reviews",
+    },
   ];
 
   return (
@@ -64,7 +70,7 @@ const DashboardLayout = () => {
       <div className="w-20 md:w-64 bg-white border-r border-gray-200 flex flex-col">
         {/* Logo */}
         <div className="p-4 flex items-center justify-center md:justify-start">
-          <div className="w-10 h-10 rounded-md bg-blue-600 flex items-center justify-center text-white font-semibold text-lg">
+          <div className="w-10 h-10 rounded-md bg-indigo-600 flex items-center justify-center text-white font-semibold text-lg">
             A
           </div>
           <span className="ml-3 text-lg font-semibold text-gray-800 hidden md:block">
